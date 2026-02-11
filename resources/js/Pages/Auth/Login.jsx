@@ -10,7 +10,7 @@ import HeadsetIcon from '@mui/icons-material/Headset';
 
 export default function Login() {
     return (
-        <div className="w-full max-w-180 min-h-screen bg-[#008c44] flex flex-col relative overflow-hidden">
+        <div className="w-full max-w-[720px] mx-auto min-h-screen bg-[#008c44] flex flex-col relative overflow-hidden shadow-xl">
             {/* Top Bar */}
             <div className="flex justify-between items-center px-5 pt-6 text-white">
                 <div className="text-xl cursor-pointer">
