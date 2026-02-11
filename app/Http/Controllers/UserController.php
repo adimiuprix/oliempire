@@ -11,4 +11,24 @@ class UserController extends Controller
     {
         return Inertia::render('Dashboard');
     }
+
+    public function task()
+    {
+        return Inertia::render('Task');
+    }
+
+    public function team()
+    {
+        return Inertia::render('Team');
+    }
+
+    public function vip()
+    {
+        return Inertia::render('Vip');
+    }
+
+    public function mine()
+    {
+        return Inertia::render('Mine');
+    }
 }

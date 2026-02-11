@@ -1,6 +1,8 @@
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import LanguageIcon from '@mui/icons-material/Language';
 import LogoutIcon from '@mui/icons-material/Logout';
+import InvestmentCard from '../Components/InvestmentCard';
+import Navbar from '../Components/Navbar';
 
 export default function Dashboard() {
     return (
@@ -130,69 +132,20 @@ export default function Dashboard() {
                     <span className="text-[10px] text-green-600 font-bold uppercase tracking-widest bg-green-50 px-3 py-1 rounded-full border border-green-100">Hot Plans</span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {/* Plan 1 */}
-                    <div className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all cursor-pointer border border-gray-100 group">
-                        <div className="h-32 bg-gray-100 overflow-hidden relative">
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                            <img
-                                src="https://images.unsplash.com/photo-1544115121-50e56163777d?q=80&w=400"
-                                alt="plan"
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                            />
-                            <div className="absolute bottom-3 left-3 z-20">
-                                <span className="bg-green-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">Active</span>
-                            </div>
-                        </div>
-                        <div className="p-4 relative">
-                            <span className="text-[11px] font-bold text-gray-800 uppercase tracking-tight block mb-3">
-                                Crude Oil Alpha
-                            </span>
-                            <div className="flex justify-between items-end">
-                                <div>
-                                    <p className="text-[9px] text-gray-400 font-medium leading-none">Daily Profit</p>
-                                    <p className="text-green-600 font-black text-xl leading-none mt-1.5">$1.48</p>
-                                </div>
-                                <div className="w-8 h-8 rounded-2xl bg-green-600 flex items-center justify-center text-white shadow-lg shadow-green-600/30 group-hover:rotate-12 transition-transform">
-                                    <VolumeUpIcon sx={{ fontSize: 16 }} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <InvestmentCard />
 
                     {/* Plan 2 */}
-                    <div className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all cursor-pointer border border-gray-100 group">
-                        <div className="h-32 bg-gray-100 overflow-hidden relative">
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                            <img
-                                src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400"
-                                alt="plan"
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                            />
-                            <div className="absolute bottom-3 left-3 z-20">
-                                <span className="bg-green-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">Active</span>
-                            </div>
-                        </div>
-                        <div className="p-4 relative">
-                            <span className="text-[11px] font-bold text-gray-800 uppercase tracking-tight block mb-3">
-                                Brent Crude B2
-                            </span>
-                            <div className="flex justify-between items-end">
-                                <div>
-                                    <p className="text-[9px] text-gray-400 font-medium leading-none">Daily Profit</p>
-                                    <p className="text-green-600 font-black text-xl leading-none mt-1.5">$5.50</p>
-                                </div>
-                                <div className="w-8 h-8 rounded-2xl bg-green-600 flex items-center justify-center text-white shadow-lg shadow-green-600/30 group-hover:rotate-12 transition-transform">
-                                    <VolumeUpIcon sx={{ fontSize: 16 }} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <InvestmentCard />
+
+                    {/* Plan 3 */}
+                    <InvestmentCard />
                 </div>
             </div>
 
             {/* Member List */}
-            <div className="px-4 mt-6">
+            <div className="px-4 mt-6 mb-20">
                 <h2 className="font-semibold mb-3">Member list</h2>
 
                 {/* Container abu rounded */}
@@ -220,27 +173,8 @@ export default function Dashboard() {
                 </div>
             </div>
 
-
             {/* Bottom Navbar */}
-            <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[720px] z-50 px-4 pb-4">
-                <div className="bg-green-700/90 backdrop-blur-lg text-white flex justify-around py-4 rounded-2xl shadow-2xl border border-white/20">
-                    <div className="flex flex-col items-center gap-1 cursor-pointer hover:scale-110 transition-transform">
-                        <span className="text-[11px] font-semibold">Home</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1 cursor-pointer opacity-70 hover:opacity-100 hover:scale-110 transition-all">
-                        <span className="text-[11px] font-semibold">Task</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1 cursor-pointer opacity-70 hover:opacity-100 hover:scale-110 transition-all">
-                        <span className="text-[11px] font-semibold">Team</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1 cursor-pointer opacity-70 hover:opacity-100 hover:scale-110 transition-all">
-                        <span className="text-[11px] font-semibold">VIP</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1 cursor-pointer opacity-70 hover:opacity-100 hover:scale-110 transition-all">
-                        <span className="text-[11px] font-semibold">Me</span>
-                    </div>
-                </div>
-            </div>
+            <Navbar />
         </div>
     );
 }
