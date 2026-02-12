@@ -12,3 +12,5 @@ Route::get('/task', [UserController::class, 'task'])->name('task');
 Route::get('/team', [UserController::class, 'team'])->name('team');
 Route::get('/vip', [UserController::class, 'vip'])->name('vip');
 Route::get('/mine', [UserController::class, 'mine'])->name('mine');
+
+Route::get('/account/recharge', [UserController::class, 'recharge'])->name('account.recharge');

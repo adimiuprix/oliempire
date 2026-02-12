@@ -33,7 +33,7 @@ export default function Task() {
                 </div>
 
                 {/* Balance Section */}
-                <div className="mt-6">
+                <div className="mt-2">
                     <div className="text-2xl font-semibold">5.08</div>
                     <div className="text-sm opacity-80">Total balance</div>
 
@@ -46,7 +46,7 @@ export default function Task() {
                 </div>
 
                 {/* Stats */}
-                <div className="flex justify-between text-center mt-6">
+                <div className="flex justify-between text-center mt-2">
                     <div className="flex-1">
                         <div className="text-lg font-semibold">0</div>
                         <div className="text-sm opacity-80">Completed</div>
@@ -62,7 +62,7 @@ export default function Task() {
                 </div>
 
                 {/* Crawl Button */}
-                <div className="mt-6">
+                <div className="mt-3">
                     <button className="w-full bg-yellow-300 text-black font-semibold py-3 rounded-xl">
                         Crawl
                     </button>

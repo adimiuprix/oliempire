@@ -31,4 +31,9 @@ class UserController extends Controller
     {
         return Inertia::render('Mine');
     }
+
+    public function recharge()
+    {
+        return Inertia::render('Account/Recharge');
+    }
 }

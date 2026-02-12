@@ -26,9 +26,7 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-
                 </div>
-
                 <div className="flex items-center gap-3 mt-4">
                     <img
                         src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
@@ -42,7 +40,6 @@ export default function Dashboard() {
                         <p className="text-sm opacity-80">Save your money&time</p>
                     </div>
                 </div>
-
             </div>
 
             {/* Menu Buttons */}
