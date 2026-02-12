@@ -165,7 +165,7 @@ export default function Login() {
             {/* Footer Decorative Image / Content */}
             <div className="absolute bottom-0 left-0 w-full pointer-events-none">
                 {/* Simulated coins background bottom */}
-                <div className="h-32 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="h-32 bg-linear-to-t from-black/20 to-transparent"></div>
             </div>
         </div>
     )

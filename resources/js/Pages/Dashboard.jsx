@@ -1,15 +1,21 @@
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import LanguageIcon from '@mui/icons-material/Language';
-import LogoutIcon from '@mui/icons-material/Logout';
+import MenuButtons from '../Components/MenuButtons';
 import InvestmentCard from '../Components/InvestmentCard';
 import Navbar from '../Components/Navbar';
+
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import GroupIcon from '@mui/icons-material/Group';
+import DownloadIcon from '@mui/icons-material/Download';
+import InfoIcon from '@mui/icons-material/Info';
 
 export default function Dashboard() {
     return (
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
 
             {/* Header */}
-            <div className="bg-gradient-to-br from-green-700 to-green-800 text-white p-6 rounded-b-[40px] shadow-lg">
+            <div className="bg-linear-to-br from-green-700 to-green-800 text-white p-6 rounded-b-[40px] shadow-lg">
                 <div className="flex justify-between items-center text-sm opacity-90">
                     <div className="w-full py-3 px-3">
                         <div className="flex items-center justify-between h-full w-full">
@@ -44,64 +50,12 @@ export default function Dashboard() {
 
             {/* Menu Buttons */}
             <div className="grid grid-cols-3 gap-3 px-4 mt-5">
-
-                <div className="w-full max-w-full space-y-3">
-                    <div className="flex items-center justify-between bg-green-700 rounded-2xl px-4 py-3 shadow-sm">
-                        {/* Left content */}
-                        <div className="flex items-center gap-3">
-                            {/* Neon bar */}
-                            <div className="w-1.5 h-6 bg-green-400 rounded-full" />
-
-                            {/* Text */}
-                            <span className="text-white font-semibold text-sm tracking-wide">
-                                Withdraw
-                            </span>
-                        </div>
-                        {/* Icon */}
-                        <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10">
-                            <LogoutIcon sx={{ fontSize: 18, color: "white" }} />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="w-full max-w-full space-y-3">
-                    <div className="flex items-center justify-between bg-green-700 rounded-2xl px-4 py-3 shadow-sm">
-                        {/* Left content */}
-                        <div className="flex items-center gap-3">
-                            {/* Neon bar */}
-                            <div className="w-1.5 h-6 bg-green-400 rounded-full" />
-
-                            {/* Text */}
-                            <span className="text-white font-semibold text-sm tracking-wide">
-                                Withdraw
-                            </span>
-                        </div>
-                        {/* Icon */}
-                        <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10">
-                            <LogoutIcon sx={{ fontSize: 18, color: "white" }} />
-                        </div>
-                    </div>
-                </div>
-                <div className="w-full max-w-full space-y-3">
-                    <div className="flex items-center justify-between bg-green-700 rounded-2xl px-4 py-3 shadow-sm">
-                        {/* Left content */}
-                        <div className="flex items-center gap-3">
-                            {/* Neon bar */}
-                            <div className="w-1.5 h-6 bg-green-400 rounded-full" />
-
-                            {/* Text */}
-                            <span className="text-white font-semibold text-sm tracking-wide">
-                                Withdraw
-                            </span>
-                        </div>
-                        {/* Icon */}
-                        <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10">
-                            <LogoutIcon sx={{ fontSize: 18, color: "white" }} />
-                        </div>
-                    </div>
-                </div>
-
-
+                <MenuButtons label="Recharge" link="/account/select-recharge" Icon={AccountBalanceWalletIcon} />
+                <MenuButtons label="Withdraw" link="/account/withdraw" Icon={PaymentsIcon} />
+                <MenuButtons label="About Us" link="/about" Icon={GroupIcon} />
+                <MenuButtons label="Invite" link="/team" Icon={GroupIcon} />
+                <MenuButtons label="Agent Benefits" link="/article" Icon={DownloadIcon} />
+                <MenuButtons label="Profile" link="/mine" Icon={InfoIcon} />
             </div>
 
             {/* Banner */}

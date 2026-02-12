@@ -14,7 +14,7 @@ export default function Team() {
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
 
             {/* Header */}
-            <div className="bg-gradient-to-br from-green-700 to-green-800 text-white p-6 rounded-b-[40px] shadow-lg">
+            <div className="bg-linear-to-br from-green-700 to-green-800 text-white p-6 rounded-b-[40px] shadow-lg">
                 {/* Top Bar */}
                 <div className="flex justify-between items-start">
                     {/* Left Content */}

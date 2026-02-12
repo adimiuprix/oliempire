@@ -8,12 +8,12 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 
 import Navbar from '../Components/Navbar';
 
-export default function Recharge() {
+export default function Mine() {
     return (
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
 
             {/* Header */}
-            <div className="relative bg-gradient-to-br from-green-700 to-green-800 text-white p-6 pb-15 rounded-b-[40px] shadow-lg">
+            <div className="relative bg-linear-to-br from-green-700 to-green-800 text-white p-6 pb-15 rounded-b-[40px] shadow-lg">
                 {/* Top Bar */}
                 <div className="flex justify-between items-start">
                     {/* Left Content */}
@@ -108,7 +108,7 @@ export default function Recharge() {
                     <button className="w-full flex items-center justify-between px-4 py-4 cursor-pointer">
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-gray-200 rounded-lg">
-                            <LockResetIcon size={25} />
+                                <LockResetIcon size={25} />
                             </div>
                             <span className="text-sm text-gray-800">Change Password</span>
                         </div>
@@ -118,7 +118,7 @@ export default function Recharge() {
                     <button className="w-full flex items-center justify-between px-4 py-4 cursor-pointer">
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-gray-200 rounded-lg">
-                            <LogoutIcon size={25} />
+                                <LogoutIcon size={25} />
                             </div>
                             <span className="text-sm text-gray-800">Sign out</span>
                         </div>
