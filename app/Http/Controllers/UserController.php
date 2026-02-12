@@ -32,8 +32,24 @@ class UserController extends Controller
         return Inertia::render('Mine');
     }
 
+
+    public function selectRecharge()
+    {
+        return Inertia::render('Account/SelectRecharge');
+    }
+
     public function recharge()
     {
         return Inertia::render('Account/Recharge');
+    }
+
+    public function withdraw()
+    {
+        return Inertia::render('Account/Withdraw');
+    }
+
+    public function changePassword()
+    {
+        return Inertia::render('Account/ChangePassword');
     }
 }

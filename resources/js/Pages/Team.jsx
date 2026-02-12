@@ -2,6 +2,13 @@ import LanguageIcon from '@mui/icons-material/Language';
 import Navbar from '../Components/Navbar';
 import LevelTeam from '../Components/LevelTeam';
 
+import XIcon from '@mui/icons-material/X';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TelegramIcon from '@mui/icons-material/Telegram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import InstagramIcon from '@mui/icons-material/Instagram';
+
 export default function Team() {
     return (
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
@@ -64,37 +71,31 @@ export default function Team() {
                         />
                     </div>
                 </div>
+
                 {/* Social Icons */}
                 <div className="w-full flex justify-center mt-4">
                     <div className="flex flex-wrap justify-center items-center gap-4">
-                        {[
-                            "X",
-                            "F",
-                            "T",
-                            "in",
-                            "WA",
-                            "IG",
-                            "TT",
-                            "..."
-                        ].map((item, i) => (
-                            <div
-                                key={i}
-                                className="
-                                    w-10 h-10
-                                    rounded-full
-                                    border border-white/40
-                                    flex items-center justify-center
-                                    text-xs
-                                    shrink-0
-                                    hover:bg-white/10
-                                    transition
-                                "
-                            >
-                                {item}
-                            </div>
-                        ))}
+                        <div className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-xs shrink-0 hover:bg-white/10 transition">
+                            <XIcon className="w-5 h-5" />
+                        </div>
+                        <div className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-xs shrink-0 hover:bg-white/10 transition">
+                            <FacebookIcon className="w-5 h-5" />
+                        </div>
+                        <div className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-xs shrink-0 hover:bg-white/10 transition">
+                            <TelegramIcon className="w-5 h-5" />
+                        </div>
+                        <div className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-xs shrink-0 hover:bg-white/10 transition">
+                            <InstagramIcon className="w-5 h-5" />
+                        </div>
+                        <div className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-xs shrink-0 hover:bg-white/10 transition">
+                            <WhatsAppIcon className="w-5 h-5" />
+                        </div>
+                        <div className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-xs shrink-0 hover:bg-white/10 transition">
+                            <LinkedInIcon className="w-5 h-5" />
+                        </div>
                     </div>
                 </div>
+
             </div>
 
             <div className="px-4 mt-8 pb-4">
@@ -161,7 +162,6 @@ export default function Team() {
                     <LevelTeam />
                     <LevelTeam />
                 </div>
-
             </div>
 
             <Navbar />

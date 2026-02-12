@@ -13,7 +13,7 @@ export default function Login() {
         <div className="w-full max-w-[720px] mx-auto min-h-screen bg-[#008c44] flex flex-col relative overflow-hidden shadow-xl">
             {/* Top Bar */}
             <div className="flex justify-between items-center px-5 pt-6 text-white">
-                <div className="text-xl cursor-pointer">
+                <div className="text-xl w-8 h-8 flex items-center justify-center cursor-pointer rounded-full border border-white">
                     <HeadsetIcon sx={{ fontSize: 18 }} />
                 </div>
                 <div className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] flex items-center gap-1 cursor-pointer border border-white/5">
@@ -26,8 +26,8 @@ export default function Login() {
                 <div className="flex justify-center mb-4">
                     <div className="w-20 h-20 rounded-2xl bg-white p-1 shadow-lg overflow-hidden flex items-center justify-center">
                         <img
-                            src="https://upload.wikimedia.org/wikipedia/en/2/23/Petroleum_Development_Oman_logo.png"
-                            alt="PDO Logo"
+                            src="/images/main-logo.webp"
+                            alt="main-logo"
                             className="w-16 h-16 object-contain"
                         />
                     </div>
