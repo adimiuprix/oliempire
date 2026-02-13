@@ -52,7 +52,7 @@ export default function Dashboard() {
             <div className="grid grid-cols-3 gap-3 px-4 mt-5">
                 <MenuButtons label="Recharge" link="/account/select-recharge" Icon={AccountBalanceWalletIcon} />
                 <MenuButtons label="Withdraw" link="/account/withdraw" Icon={PaymentsIcon} />
-                <MenuButtons label="About Us" link="/about" Icon={GroupIcon} />
+                <MenuButtons label="About Us" link="/company" Icon={GroupIcon} />
                 <MenuButtons label="Invite" link="/team" Icon={GroupIcon} />
                 <MenuButtons label="Agent Benefits" link="/article" Icon={DownloadIcon} />
                 <MenuButtons label="Profile" link="/mine" Icon={InfoIcon} />

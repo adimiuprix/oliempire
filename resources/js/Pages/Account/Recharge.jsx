@@ -1,17 +1,9 @@
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Navbar from '../../Components/Navbar';
+import AccountLayout from '../../Layouts/AccountLayout';
 
 export default function Recharge() {
     return (
-        <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
-            <div className="w-full bg-green-700 h-10 flex items-center justify-center relative text-white">
-                {/* Back Button */}
-                <button className="absolute left-4 text-white">
-                    <ArrowBackIosIcon size={22} />
-                </button>
-                <p>Recharge</p>
-            </div>
-
+        <div>
             <div className="flex justify-center px-4">
                 <div className="w-full max-w-md flex flex-col gap-6">
                     <div className="p-6 flex flex-col items-center">
@@ -51,3 +43,5 @@ export default function Recharge() {
         </div>
     )
 }
+
+Recharge.layout = (page) => <AccountLayout title="Recharge">{page}</AccountLayout>;
