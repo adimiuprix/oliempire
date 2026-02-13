@@ -20,3 +20,4 @@ Route::get('/account/recharge', [UserController::class, 'recharge'])->name('acco
 Route::get('/account/withdraw', [UserController::class, 'withdraw'])->name('account.withdraw');
 Route::get('/account/balance', [UserController::class, 'balance'])->name('account.balance');
 Route::get('/account/change-password', [UserController::class, 'changePassword'])->name('account.change-password');
+Route::get('/account/finance', [UserController::class, 'finance'])->name('account.finance');

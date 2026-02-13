@@ -6,6 +6,8 @@ import LockResetIcon from '@mui/icons-material/LockReset';
 import LogoutIcon from '@mui/icons-material/Logout';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
+import { Link, router } from '@inertiajs/react';
+
 import Navbar from '../Components/Navbar';
 
 export default function Mine() {
@@ -71,7 +73,7 @@ export default function Mine() {
                                 Save your money&time
                             </p>
                         </div>
-                        <button className="bg-lime-400 text-black text-xs px-5 py-1.5 rounded-full font-medium">
+                        <button onClick={() => router.visit('/account/balance')} className="bg-lime-400 text-black text-xs px-5 py-1.5 rounded-full font-medium">
                             Account
                         </button>
                     </div>
@@ -81,48 +83,54 @@ export default function Mine() {
             <div className="p-4 min-h-screen pt-10">
                 <div className="grid grid-cols-3 gap-3 px-4 mt-5">
 
-                    <div className="flex flex-col items-center justify-center py-6">
-                        <div className="p-3">
-                            <PaidIcon size={25} className='text-green-600' />
+                    <Link href="/account/select-recharge">
+                        <div className="flex flex-col items-center justify-center py-6">
+                            <div className="p-3">
+                                <PaidIcon sx={{ fontSize: 23 }} className='text-green-600' />
+                            </div>
+                            <p className="mt-3 text-sm text-gray-700">Recharge</p>
                         </div>
-                        <p className="mt-3 text-sm text-gray-700">Recharge</p>
-                    </div>
+                    </Link>
 
-                    <div className="flex flex-col items-center justify-center py-6">
-                        <div className="p-3">
-                            <ExitToAppRoundedIcon size={25} className='text-green-600' />
+                    <Link href="/account/withdraw">
+                        <div className="flex flex-col items-center justify-center py-6">
+                            <div className="p-3">
+                                <ExitToAppRoundedIcon sx={{ fontSize: 23 }} className='text-green-600' />
+                            </div>
+                            <p className="mt-3 text-sm text-gray-700">Withdraw</p>
                         </div>
-                        <p className="mt-3 text-sm text-gray-700">Withdraw</p>
-                    </div>
+                    </Link>
 
-                    <div className="flex flex-col items-center justify-center py-6">
-                        <div className="p-3">
-                            <CandlestickChartRoundedIcon size={25} className='text-green-600' />
+                    <Link href="/account/finance">
+                        <div className="flex flex-col items-center justify-center py-6">
+                            <div className="p-3">
+                                <CandlestickChartRoundedIcon sx={{ fontSize: 23 }} className='text-green-600' />
+                            </div>
+                            <p className="mt-3 text-sm text-gray-700">Financial records</p>
                         </div>
-                        <p className="mt-3 text-sm text-gray-700">Financial records</p>
-                    </div>
+                    </Link>
                 </div>
 
                 <div className="divide-y divide-gray-200">
                     {/* Change Password */}
-                    <button className="w-full flex items-center justify-between px-4 py-4 cursor-pointer">
+                    <button onClick={() => router.visit('/account/change-password')} className="w-full flex items-center justify-between px-4 py-4 cursor-pointer">
                         <div className="flex items-center gap-3">
-                            <div className="p-2 bg-gray-200 rounded-lg">
-                                <LockResetIcon size={25} />
+                            <div className="p-1 bg-gray-200 rounded-lg">
+                                <LockResetIcon sx={{ fontSize: 18 }} />
                             </div>
                             <span className="text-sm text-gray-800">Change Password</span>
                         </div>
-                        <KeyboardDoubleArrowRightIcon className="text-gray-500" />
+                        <KeyboardDoubleArrowRightIcon sx={{ fontSize: 18 }} />
                     </button>
                     {/* Sign Out */}
-                    <button className="w-full flex items-center justify-between px-4 py-4 cursor-pointer">
+                    <button onClick={() => router.visit('/account/sign-out')} className="w-full flex items-center justify-between px-4 py-4 cursor-pointer">
                         <div className="flex items-center gap-3">
-                            <div className="p-2 bg-gray-200 rounded-lg">
-                                <LogoutIcon size={25} />
+                            <div className="p-1 bg-gray-200 rounded-lg">
+                                <LogoutIcon sx={{ fontSize: 18 }} />
                             </div>
                             <span className="text-sm text-gray-800">Sign out</span>
                         </div>
-                        <KeyboardDoubleArrowRightIcon className="text-gray-500" />
+                        <KeyboardDoubleArrowRightIcon sx={{ fontSize: 18 }} />
                     </button>
                 </div>
             </div>

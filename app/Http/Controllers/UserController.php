@@ -67,4 +67,9 @@ class UserController extends Controller
     {
         return Inertia::render('Account/Article');
     }
+
+    public function finance()
+    {
+        return Inertia::render('Account/Finance');
+    }
 }
