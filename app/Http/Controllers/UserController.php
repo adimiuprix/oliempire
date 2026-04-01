@@ -93,8 +93,18 @@ class UserController extends Controller
 
     public function recharge($network)
     {
+        $evmAddress  = '0xdC5f255f2bc90877423A2260F70d358683190bDe';
+        $tronAddress = 'TNAz2KUV2NayzR3XwVRgdQa28J2GP4XmHS';
+
+        $evmNetworks = [
+            'BEP20-USDT', 'BNB', 'BEP20-USDC', 'POLYGON-USDC', 'POLYGON-USDT', 'ETH-USDC', 'ETH-USDT'
+        ];
+
+        $address = in_array($network, $evmNetworks) ? $evmAddress : $tronAddress;
+
         return Inertia::render('Account/Recharge', [
-            'network' => $network
+            'network' => $network,
+            'address' => $address,
         ]);
     }
 

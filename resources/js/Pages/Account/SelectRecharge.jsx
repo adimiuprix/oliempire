@@ -7,12 +7,12 @@ export default function SelectRecharge() {
         { name: "BEP20-USDT", icon: "/images/coins/bep20-usdt.webp" },
         { name: "BNB", icon: "/images/coins/bnb.webp" },
         { name: "BEP20-USDC", icon: "/images/coins/bep20-usdc.webp" },
-        { name: "TRX", icon: "/images/coins/trx.webp" },
-        { name: "TRC20-USDT", icon: "/images/coins/trc20-usdt.webp" },
         { name: "POLYGON-USDC", icon: "/images/coins/polygon-usdc.webp" },
         { name: "POLYGON-USDT", icon: "/images/coins/polygon-usdt.webp" },
         { name: "ETH-USDC", icon: "/images/coins/eth-usdc.webp" },
         { name: "ETH-USDT", icon: "/images/coins/eth-usdt.webp" },
+        { name: "TRX", icon: "/images/coins/trx.webp" },
+        { name: "TRC20-USDT", icon: "/images/coins/trc20-usdt.webp" },
     ];
 
     return (
