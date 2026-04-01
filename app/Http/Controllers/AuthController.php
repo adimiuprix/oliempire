@@ -54,11 +54,7 @@ class AuthController extends Controller
             // generate address evm
             $evmInit = new Address();
             $pubKey = $evmInit->getPublicKey();
-            $user->wallet()->create([
-                'private_key' => $evmInit->getPrivateKey(),
-                'public_key'  => $pubKey,
-                'address'     => '0x' . $evmInit->get(),
-            ]);
+            $evmAddress = '0x' . $evmInit->get();
 
             //generate tron address
             $hash = Keccak::hash(hex2bin($pubKey), 256);
@@ -68,9 +64,10 @@ class AuthController extends Controller
             $tronAddress = $base58->encode(hex2bin($tronHex . $checkSum));
 
             $user->wallet()->create([
-                'private_key' => $evmInit->getPrivateKey(),
-                'public_key'  => $pubKey,
-                'address'     => $tronAddress,
+                'private_key'  => $evmInit->getPrivateKey(),
+                'public_key'   => $pubKey,
+                'eth_address'  => $evmAddress,
+                'tron_address' => $tronAddress,
             ]);
         });
 

@@ -10,7 +10,8 @@ class Wallet extends Model
         'user_id',
         'private_key',
         'public_key',
-        'address',
+        'eth_address',
+        'tron_address',
     ];
 
     public function user()
