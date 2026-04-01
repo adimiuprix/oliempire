@@ -10,7 +10,7 @@ import { Link, router } from '@inertiajs/react';
 
 import Navbar from '../Components/Navbar';
 
-export default function Mine() {
+export default function Mine({ username, balance, recharge_amount }) {
     return (
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
 
@@ -32,7 +32,7 @@ export default function Mine() {
 
                         {/* User Email */}
                         <div>
-                            <p className="text-sm font-semibold">hello,awansean557@gmail.com</p>
+                            <p className="text-sm font-semibold">hello, {username}</p>
                         </div>
                     </div>
 
@@ -54,11 +54,11 @@ export default function Mine() {
                 {/* Balance */}
                 <div className="flex justify-between text-center mt-2">
                     <div className="flex-1">
-                        <div className="text-lg font-semibold">5.08</div>
+                        <div className="text-lg font-semibold">{balance}</div>
                         <div className="text-sm opacity-80">Total balance (USDT)</div>
                     </div>
                     <div className="flex-1">
-                        <div className="text-lg font-semibold">0</div>
+                        <div className="text-lg font-semibold">{recharge_amount}</div>
                         <div className="text-sm opacity-80">Recharge amount (USDT)</div>
                     </div>
                 </div>

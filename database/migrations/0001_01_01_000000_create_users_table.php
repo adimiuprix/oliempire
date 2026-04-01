@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('invitation_code')->unique();
             $table->string('password');
             $table->integer('referred_by')->nullable();
+            $table->decimal('balance', 10, 2)->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

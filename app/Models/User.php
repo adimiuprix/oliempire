@@ -23,6 +23,7 @@ class User extends Authenticatable
         'invitation_code',
         'password',
         'referred_by',
+        'balance',
     ];
 
     /**
@@ -46,5 +47,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function username()
+    {
+        return $this->email ?? $this->phone;
     }
 }

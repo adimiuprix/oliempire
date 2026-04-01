@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -77,7 +78,11 @@ class UserController extends Controller
 
     public function mine()
     {
-        return Inertia::render('Mine');
+        return Inertia::render('Mine', [
+            'username' => Auth::user()->username(),
+            'balance' => Auth::user()->balance,
+            'recharge_amount' => 0,
+        ]);
     }
 
 
@@ -86,9 +91,11 @@ class UserController extends Controller
         return Inertia::render('Account/SelectRecharge');
     }
 
-    public function recharge()
+    public function recharge($network)
     {
-        return Inertia::render('Account/Recharge');
+        return Inertia::render('Account/Recharge', [
+            'network' => $network
+        ]);
     }
 
     public function withdraw()
