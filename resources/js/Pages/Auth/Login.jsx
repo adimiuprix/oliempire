@@ -1,3 +1,4 @@
+import { useState } from "react";
 import * as Tabs from "@radix-ui/react-tabs";
 import { Form } from "radix-ui";
 import { router } from "@inertiajs/react";
@@ -9,6 +10,25 @@ import LanguageIcon from '@mui/icons-material/Language';
 import HeadsetIcon from '@mui/icons-material/Headset';
 
 export default function Login() {
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        phone: '',
+    });
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        router.post('/login', formData);
+    };
+
     return (
         <div className="w-full max-w-[720px] mx-auto min-h-screen bg-[#008c44] flex flex-col relative overflow-hidden shadow-xl">
             {/* Top Bar */}
@@ -68,6 +88,9 @@ export default function Login() {
                                     <Form.Control asChild>
                                         <input
                                             type="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
                                             placeholder="E-mail"
                                             className="bg-transparent outline-none w-full text-sm placeholder:text-gray-300"
                                         />
@@ -84,6 +107,9 @@ export default function Login() {
                                     <Form.Control asChild>
                                         <input
                                             type="password"
+                                            name="password"
+                                            value={formData.password}
+                                            onChange={handleChange}
                                             placeholder="Password"
                                             className="bg-transparent outline-none w-full text-sm placeholder:text-gray-300"
                                         />
@@ -107,6 +133,9 @@ export default function Login() {
                                     <Form.Control asChild>
                                         <input
                                             type="tel"
+                                            name="phone"
+                                            value={formData.phone}
+                                            onChange={handleChange}
                                             placeholder="Phone Number"
                                             className="bg-transparent outline-none w-full text-sm placeholder:text-gray-300"
                                         />
@@ -123,6 +152,9 @@ export default function Login() {
                                     <Form.Control asChild>
                                         <input
                                             type="password"
+                                            name="password"
+                                            value={formData.password}
+                                            onChange={handleChange}
                                             placeholder="Password"
                                             className="bg-transparent outline-none w-full text-sm placeholder:text-gray-300"
                                         />
@@ -144,7 +176,7 @@ export default function Login() {
                     {/* Sign In Button (Overlapping Card) */}
                     <div className="relative h-7">
                         <Form.Submit asChild>
-                            <button className="absolute left-0 right-0 top-6 w-full bg-[#1fff1a] hover:bg-[#1cd417] transition-all transform active:scale-[0.98] text-black font-bold py-4 rounded-full text-sm shadow-xl shadow-[#1fff1a]/20">
+                            <button onClick={handleSubmit} className="absolute left-0 right-0 top-6 w-full bg-[#1fff1a] hover:bg-[#1cd417] transition-all transform active:scale-[0.98] text-black font-bold py-4 rounded-full text-sm shadow-xl shadow-[#1fff1a]/20">
                                 Sign In
                             </button>
                         </Form.Submit>
