@@ -11,6 +11,33 @@ class UserController extends Controller
     {
         return Inertia::render('Dashboard', [
             'message' => "Our ge the sustainable investors!",
+            'banner' => 'banner.webp',
+            'plans' => [
+                [
+                    'id' => 1,
+                    'name' => 'Plan 1',
+                    'price' => 100,
+                    'daily_income' => 10,
+                    'total_income' => 1000,
+                    'duration' => 100,
+                ],
+                [
+                    'id' => 2,
+                    'name' => 'Plan 2',
+                    'price' => 200,
+                    'daily_income' => 20,
+                    'total_income' => 2000,
+                    'duration' => 100,
+                ],
+                [
+                    'id' => 3,
+                    'name' => 'Plan 3',
+                    'price' => 300,
+                    'daily_income' => 30,
+                    'total_income' => 3000,
+                    'duration' => 100,
+                ],
+            ],
         ]);
     }
 
@@ -21,7 +48,26 @@ class UserController extends Controller
 
     public function team()
     {
-        return Inertia::render('Team');
+        return Inertia::render('Team', [
+            'invite_code' => '123456',
+            'link_refferal' => 'https://oliempire.com/register?ref=123456',
+            'team_size' => 10,
+            'team_recharge' => 100,
+            'team_withdrawal' => 100,
+            'new_team' => 0,
+            'first_recharge' => 1,
+            'first_withdrawal' => 1,
+            'teams' => [
+                [
+                    'id' => 1,
+                    'account' => 'rus.***********com',
+                    'recharge_amount' => 10,
+                    'recharge_rebate' => 1.38,
+                    'task_rebate' => 100,
+                    'join_time' => '10/02/2026 13:18:57'
+                ]
+            ]
+        ]);
     }
 
     public function vip()

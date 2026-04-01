@@ -9,7 +9,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
-export default function Team() {
+export default function Team({ invite_code, link_refferal, team_size, team_recharge, team_withdrawal, new_team, first_recharge, first_withdrawal, teams }) {
     return (
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
 
@@ -34,7 +34,7 @@ export default function Team() {
                             <p className="text-sm opacity-90">Invitation code:</p>
                             <div className="flex items-center gap-3 mt-1">
                                 <span className="text-3xl font-semibold tracking-wide">
-                                    971666
+                                    {invite_code}
                                 </span>
 
                                 <button className="bg-black text-white text-xs px-4 py-1 rounded-full">
@@ -48,7 +48,7 @@ export default function Team() {
                             <p className="text-sm opacity-90">Share your referral link and start earning</p>
                             <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-1 w-full">
                                 <div className="flex-1 min-w-0">
-                                    <span className="block text-sm truncate sm:break-all">https://www.oilempire.cc/#/register?ref=971666</span>
+                                    <span className="block text-sm truncate sm:break-all">{link_refferal}</span>
                                 </div>
                                 <button className="bg-black text-white text-xs px-4 py-1 rounded-full shrink-0 w-fit">
                                     Copy
@@ -112,11 +112,11 @@ export default function Team() {
                         <div className="space-y-6">
                             <div>
                                 <p className="text-sm text-black">Team size</p>
-                                <p className="text-xl font-semibold text-black">13</p>
+                                <p className="text-xl font-semibold text-black">{team_size}</p>
                             </div>
                             <div>
                                 <p className="text-sm text-black">New team</p>
-                                <p className="text-xl font-semibold text-black">0</p>
+                                <p className="text-xl font-semibold text-black">{new_team}</p>
                             </div>
                         </div>
 
@@ -124,11 +124,11 @@ export default function Team() {
                         <div className="space-y-6">
                             <div>
                                 <p className="text-sm text-black">Team recharge</p>
-                                <p className="text-xl font-semibold text-black">$7.70</p>
+                                <p className="text-xl font-semibold text-black">${team_recharge}</p>
                             </div>
                             <div>
                                 <p className="text-sm text-black">First time recharge</p>
-                                <p className="text-xl font-semibold text-black">1</p>
+                                <p className="text-xl font-semibold text-black">{first_recharge}</p>
                             </div>
                         </div>
 
@@ -136,11 +136,11 @@ export default function Team() {
                         <div className="space-y-6">
                             <div>
                                 <p className="text-sm text-black">Team Withdrawal</p>
-                                <p className="text-xl font-semibold text-black">$3.08</p>
+                                <p className="text-xl font-semibold text-black">${team_withdrawal}</p>
                             </div>
                             <div>
                                 <p className="text-sm text-black">First withdrawal</p>
-                                <p className="text-xl font-semibold text-black">1</p>
+                                <p className="text-xl font-semibold text-black">{first_withdrawal}</p>
                             </div>
                         </div>
 
@@ -156,11 +156,9 @@ export default function Team() {
                     </h2>
                 </div>
                 <div className="flex flex-col items-center gap-6 mt-5">
-                    <LevelTeam />
-                    <LevelTeam />
-                    <LevelTeam />
-                    <LevelTeam />
-                    <LevelTeam />
+                    {teams.map((team, index) => (
+                        <LevelTeam key={index} team={team} />
+                    ))}
                 </div>
             </div>
 

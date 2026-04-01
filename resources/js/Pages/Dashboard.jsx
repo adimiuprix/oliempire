@@ -10,7 +10,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import DownloadIcon from '@mui/icons-material/Download';
 import InfoIcon from '@mui/icons-material/Info';
 
-export default function Dashboard({ message }) {
+export default function Dashboard({ message, plans }) {
     return (
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
 
@@ -61,7 +61,7 @@ export default function Dashboard({ message }) {
             {/* Banner */}
             <div className="px-4 mt-5">
                 <img
-                    src="https://images.unsplash.com/photo-1581093588401-22f8f7c3a6e2?q=80&w=1200"
+                    src="/images/banner.webp"
                     alt="banner"
                     className="rounded-2xl w-full h-40 object-cover"
                 />
@@ -74,7 +74,7 @@ export default function Dashboard({ message }) {
             </div>
 
             {/* Task Hall */}
-            <div className="px-4 mt-8 pb-4">
+            <div className="px-4 mt-8 pb-20">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="font-bold text-gray-800 flex items-center gap-2">
                         <div className="w-1.5 h-5 bg-green-600 rounded-full" />
@@ -84,45 +84,12 @@ export default function Dashboard({ message }) {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {/* Plan 1 */}
-                    <InvestmentCard />
-
-                    {/* Plan 2 */}
-                    <InvestmentCard />
-
-                    {/* Plan 3 */}
-                    <InvestmentCard />
+                    {plans.map((plan) => (
+                        <InvestmentCard key={plan.id} plan={plan} />
+                    ))}
                 </div>
             </div>
 
-            {/* Member List */}
-            <div className="px-4 mt-6 mb-20">
-                <h2 className="font-semibold mb-3">Member list</h2>
-
-                {/* Container abu rounded */}
-                <div className="bg-gray-200 rounded-2xl px-4 py-3 space-y-4">
-
-                    {/* item1 */}
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                            <span className="bg-green-600 text-white text-[10px] px-2 py-1 rounded-md font-semibold">6765</span>
-                            <span className="text-gray-700 text-sm tracking-wide">865658567</span>
-                        </div>
-                        <span className="text-slate-800 font-semibold text-lg">5895658657</span>
-                    </div>
-
-                    {/* item2 */}
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                            <span className="bg-green-600 text-white text-[10px] px-2 py-1 rounded-md font-semibold">6765</span>
-                            <span className="text-gray-700 text-sm tracking-wide">865658567</span>
-                        </div>
-                        <span className="text-slate-800 font-semibold text-lg">5895658657</span>
-                    </div>
-
-
-                </div>
-            </div>
 
             {/* Bottom Navbar */}
             <Navbar />

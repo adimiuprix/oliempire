@@ -1,4 +1,4 @@
-export default function InvestmentCard() {
+export default function InvestmentCard({ plan }) {
     return (
         <div className="w-full max-w-sm rounded-2xl bg-gray-200 p-4 shadow-lg">
             {/* Image */}
@@ -12,14 +12,14 @@ export default function InvestmentCard() {
 
             {/* Plan title box */}
             <div className="mt-3 rounded-md bg-gray-300 px-3 py-2 text-sm font-semibold text-gray-800">
-                Investment Plan 10
+                {plan.name}
             </div>
 
             {/* Footer text */}
             <p className="mt-3 text-xs text-gray-600">Order commission</p>
 
             {/* Price */}
-            <p className="text-lg font-semibold text-green-700">$2,950.00</p>
+            <p className="text-lg font-semibold text-green-700">${plan.price}</p>
         </div>
     );
 }

@@ -1,36 +1,36 @@
-export default function LevelTeam() {
+export default function LevelTeam({ team }) {
     return (
         <div className="w-full bg-gray-200 rounded-2xl px-8 py-6 text-black shadow-sm">
             {/* Top Section */}
             <div className="flex justify-between items-start">
                 <div className="flex gap-2">
                     <span className="text-sm opacity-90">Account</span>
-                    <span className="text-sm font-medium">rus.***********com</span>
+                    <span className="text-sm font-medium">{team.account}</span>
                 </div>
             </div>
             {/* Middle Stats */}
             <div className="flex justify-between text-center mt-3">
                 <div className="flex-1">
                     <p className="text-sm opacity-90">Recharge amount</p>
-                    <p className="text-xl font-medium mt-1">7.70</p>
+                    <p className="text-xl font-medium mt-1">{team.recharge_amount}</p>
                 </div>
 
                 <div className="flex-1">
                     <p className="text-sm opacity-90">Recharge rebate</p>
-                    <p className="text-xl font-medium mt-1">1.38</p>
+                    <p className="text-xl font-medium mt-1">{team.recharge_rebate}</p>
                 </div>
 
                 <div className="flex-1">
                     <p className="text-sm opacity-90">Task rebate</p>
-                    <p className="text-xl font-medium mt-1">0</p>
+                    <p className="text-xl font-medium mt-1">{team.task_rebate}</p>
                 </div>
             </div>
 
             {/* Bottom Section */}
             <div className="flex justify-end mt-3">
                 <p className="text-sm opacity-90">
-                Joining time&nbsp;&nbsp;
-                <span className="font-medium">10/02/2026 13:18:57</span>
+                    Joining time&nbsp;&nbsp;
+                    <span className="font-medium">{team.join_time}</span>
                 </p>
             </div>
         </div>
