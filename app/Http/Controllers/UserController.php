@@ -9,7 +9,9 @@ class UserController extends Controller
 {
     public function dashboard()
     {
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', [
+            'message' => "Our ge the sustainable investors!",
+        ]);
     }
 
     public function task()

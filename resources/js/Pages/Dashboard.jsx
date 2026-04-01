@@ -10,7 +10,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import DownloadIcon from '@mui/icons-material/Download';
 import InfoIcon from '@mui/icons-material/Info';
 
-export default function Dashboard() {
+export default function Dashboard({ message }) {
     return (
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
 
@@ -23,7 +23,7 @@ export default function Dashboard() {
                             <div className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-full shadow-md flex-1 min-w-0">
                                 <VolumeUpIcon sx={{ fontSize: 18 }} />
                                 <p className="text-xs whitespace-nowrap overflow-hidden text-ellipsis">
-                                    Our ge the sustainable investors!
+                                    {message}
                                 </p>
                             </div>
                             {/* Language */}
