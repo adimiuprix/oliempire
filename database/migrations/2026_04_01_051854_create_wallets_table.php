@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('private_key')->nullable();
             $table->string('public_key')->nullable();
             $table->string('address')->nullable();
-            $table->enum('network', ['tron', 'ethereum', 'binance'])->default('tron');
             $table->timestamps();
         });
     }

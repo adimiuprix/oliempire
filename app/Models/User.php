@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->email ?? $this->phone;
     }
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
 }
