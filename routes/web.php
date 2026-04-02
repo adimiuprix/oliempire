@@ -12,7 +12,7 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
 Route::post('/register', [AuthController::class, 'registerPost'])->name('register.post');
 
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/account/signout', [AuthController::class, 'logout'])->name('account.signout');
 
 Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 Route::get('/task', [UserController::class, 'task'])->name('task');

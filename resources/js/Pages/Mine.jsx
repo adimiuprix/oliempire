@@ -123,7 +123,7 @@ export default function Mine({ username, balance, recharge_amount }) {
                         <KeyboardDoubleArrowRightIcon sx={{ fontSize: 18 }} />
                     </button>
                     {/* Sign Out */}
-                    <button onClick={() => router.visit('/account/sign-out')} className="w-full flex items-center justify-between px-4 py-4 cursor-pointer">
+                    <button onClick={() => router.visit('/account/signout')} className="w-full flex items-center justify-between px-4 py-4 cursor-pointer">
                         <div className="flex items-center gap-3">
                             <div className="p-1 bg-gray-200 rounded-lg">
                                 <LogoutIcon sx={{ fontSize: 18 }} />

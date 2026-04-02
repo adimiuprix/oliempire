@@ -111,7 +111,9 @@ class UserController extends Controller
 
     public function withdraw()
     {
-        return Inertia::render('Account/Withdraw');
+        return Inertia::render('Account/Withdraw', [
+            'balance' => Auth::user()->balance,
+        ]);
     }
 
     public function balance()
