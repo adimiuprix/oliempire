@@ -18,6 +18,7 @@ class UserController extends Controller
                 return [
                     'id' => $plan->id,
                     'name' => $plan->getName(),
+                    'image' => $plan->getImage(),
                     'price' => $plan->getPrice(),
                     'daily_income' => $plan->getDailyIncome(),
                     'total_income' => $plan->getTotalIncome(),

@@ -4,7 +4,7 @@ export default function InvestmentCard({ plan }) {
             {/* Image */}
             <div className="overflow-hidden rounded-xl">
                 <img
-                    src="/images/investment.jpg"
+                    src={plan.image}
                     alt="Investment Plan"
                     className="h-36 w-full object-cover"
                 />

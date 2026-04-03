@@ -13,6 +13,11 @@ class Plan extends Model
         return $this->plan_name;
     }
 
+    public function getImage()
+    {
+        return asset('images/plans/' . $this->image);
+    }
+
     public function getPrice()
     {
         return $this->amount;
