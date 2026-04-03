@@ -1,18 +1,46 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import LanguageIcon from '@mui/icons-material/Language';
 import Navbar from '../Components/Navbar';
 import { router, usePage } from '@inertiajs/react';
 
 export default function Task({ balance, profit_balance, all_count, completed_count, in_progress_count, investments }) {
-    const [activeTab, setActiveTab] = useState("progress")
+    const [activeTab, setActiveTab] = useState("progress");
+    const [currentTime, setCurrentTime] = useState(new Date());
 
-    // Filter investments based on tab
-    const filteredInvestments = investments.filter(inv =>
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const formatCountdown = (targetDate) => {
+        const diff = new Date(targetDate) - currentTime;
+        if (diff <= 0) return "00:00:00";
+        const h = Math.floor(diff / 3600000).toString().padStart(2, '0');
+        const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+        const s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+        return `${h}:${m}:${s}`;
+    };
+
+    // Recalculate ready status in real-time
+    const processedInvestments = investments.map(inv => ({
+        ...inv,
+        is_ready: !inv.is_completed && new Date(inv.next_payment_date) <= currentTime
+    }));
+
+    // Filter based on processed status
+    const filteredInvestments = processedInvestments.filter(inv =>
         activeTab === "progress" ? !inv.is_completed : inv.is_completed
     );
 
-    const hasReadyTasks = investments.some(inv => inv.is_ready);
+    const hasReadyTasks = processedInvestments.some(inv => inv.is_ready);
+
+    // Get soonest next payment for the main button
+    const nextTask = processedInvestments
+        .filter(inv => !inv.is_ready && !inv.is_completed)
+        .sort((a, b) => new Date(a.next_payment_date) - new Date(b.next_payment_date))[0];
 
     const handleCrawl = (investmentId = null) => {
         router.post('/crawl', {
@@ -101,7 +129,10 @@ export default function Task({ balance, profit_balance, all_count, completed_cou
                             ? "bg-yellow-300 text-black active:scale-95"
                             : "bg-gray-400 text-gray-200 cursor-not-allowed opacity-50"
                             }`}>
-                        {hasReadyTasks ? "Crawl All Tasks" : "All Tasks Done"}
+                        {hasReadyTasks
+                            ? "Crawl All Tasks"
+                            : (nextTask ? `Next in: ${formatCountdown(nextTask.next_payment_date)}` : "All Tasks Done")
+                        }
                     </button>
                 </div>
             </div>
@@ -170,20 +201,14 @@ export default function Task({ balance, profit_balance, all_count, completed_cou
                                         {/* Progress button */}
                                         {!inv.is_completed && (
                                             <div className="flex justify-end mt-3 items-center gap-2">
-                                                {!inv.is_ready && (
-                                                    <span className="text-[10px] text-gray-400">
-                                                        Next: {new Date(inv.next_payment_date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
-                                                    </span>
-                                                )}
                                                 <button
                                                     onClick={() => handleCrawl(inv.id)}
                                                     disabled={!inv.is_ready}
-                                                    className={`px-4 py-1 rounded-full text-xs transition-all ${
-                                                        inv.is_ready
+                                                    className={`px-4 py-1 rounded-full text-xs transition-all ${inv.is_ready
                                                         ? "bg-black text-white active:scale-95"
                                                         : "bg-gray-200 text-gray-400 cursor-not-allowed"
-                                                    }`}>
-                                                    {inv.is_ready ? "To complete" : "Waiting"}
+                                                        }`}>
+                                                    {inv.is_ready ? "To complete" : formatCountdown(inv.next_payment_date)}
                                                 </button>
                                             </div>
                                         )}
