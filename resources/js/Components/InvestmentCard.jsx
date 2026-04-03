@@ -1,6 +1,6 @@
 export default function InvestmentCard({ plan }) {
     return (
-        <div className="w-full max-w-sm rounded-2xl bg-gray-200 p-4 shadow-lg">
+        <div className="w-full rounded-2xl bg-gray-200 p-4 shadow-lg">
             {/* Image */}
             <div className="overflow-hidden rounded-xl">
                 <img
