@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Plan;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -13,32 +14,7 @@ class UserController extends Controller
         return Inertia::render('Dashboard', [
             'message' => "Our ge the sustainable investors!",
             'banner' => 'banner.webp',
-            'plans' => [
-                [
-                    'id' => 1,
-                    'name' => 'Plan 1',
-                    'price' => 100,
-                    'daily_income' => 10,
-                    'total_income' => 1000,
-                    'duration' => 100,
-                ],
-                [
-                    'id' => 2,
-                    'name' => 'Plan 2',
-                    'price' => 200,
-                    'daily_income' => 20,
-                    'total_income' => 2000,
-                    'duration' => 100,
-                ],
-                [
-                    'id' => 3,
-                    'name' => 'Plan 3',
-                    'price' => 300,
-                    'daily_income' => 30,
-                    'total_income' => 3000,
-                    'duration' => 100,
-                ],
-            ],
+            'plans' => Plan::whereStatus(1)->get(),
         ]);
     }
 

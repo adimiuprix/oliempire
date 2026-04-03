@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('plan_name')->unique();
-            $table->TinyInteger('amount_type')->nullable();
             $table->decimal('amount')->nullable();
             $table->decimal('return_interest')->nullable();
             $table->string('interest_status')->nullable();
