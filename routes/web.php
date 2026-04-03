@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InvestController;
 
 Route::get('/', [AuthController::class, 'index'])->name('home');
 
@@ -28,3 +29,5 @@ Route::get('/account/withdraw', [UserController::class, 'withdraw'])->name('acco
 Route::get('/account/balance', [UserController::class, 'balance'])->name('account.balance');
 Route::get('/account/change-password', [UserController::class, 'changePassword'])->name('account.change-password');
 Route::get('/account/finance', [UserController::class, 'finance'])->name('account.finance');
+
+Route::post('/order', [InvestController::class, 'order'])->name('order');

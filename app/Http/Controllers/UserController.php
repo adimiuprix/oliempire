@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Plan;
+use App\Models\Investment;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -30,7 +31,40 @@ class UserController extends Controller
 
     public function task()
     {
-        return Inertia::render('Task');
+        $user = Auth::user();
+        $investments = Investment::with('plan')->where('user_id', $user->id)->latest()->get();
+
+        $completedCount = 0;
+        $inProgressCount = 0;
+
+        $mappedInvestments = $investments->map(function ($investment) use (&$completedCount, &$inProgressCount) {
+            $plan = $investment->plan;
+            $isCompleted = ($investment->pay_count >= $plan->how_many_time);
+
+            if ($isCompleted) {
+                $completedCount++;
+            } else {
+                $inProgressCount++;
+            }
+
+            return [
+                'id' => $investment->id,
+                'plan_name' => $plan->plan_name,
+                'image' => $plan->getImage(),
+                'price' => $investment->amount,
+                'income' => $plan->getTotalIncome(),
+                'status' => $investment->payment_status,
+                'is_completed' => $isCompleted,
+            ];
+        });
+
+        return Inertia::render('Task', [
+            'balance' => $user->balance,
+            'all_count' => $investments->count(),
+            'completed_count' => $completedCount,
+            'in_progress_count' => $inProgressCount,
+            'investments' => $mappedInvestments,
+        ]);
     }
 
     public function team()

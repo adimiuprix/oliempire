@@ -3,8 +3,14 @@ import { useState } from "react"
 import LanguageIcon from '@mui/icons-material/Language';
 import Navbar from '../Components/Navbar';
 
-export default function Task() {
+export default function Task({ balance, all_count, completed_count, in_progress_count, investments }) {
     const [activeTab, setActiveTab] = useState("progress")
+
+    // Filter investments based on tab
+    const filteredInvestments = investments.filter(inv =>
+        activeTab === "progress" ? !inv.is_completed : inv.is_completed
+    );
+
     return (
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
 
@@ -34,7 +40,7 @@ export default function Task() {
 
                 {/* Balance Section */}
                 <div className="mt-2">
-                    <div className="text-2xl font-semibold">5.08</div>
+                    <div className="text-2xl font-semibold">{Number(balance).toFixed(2)}</div>
                     <div className="text-sm opacity-80">Total balance</div>
 
                     {/* Recharge Button */}
@@ -48,15 +54,15 @@ export default function Task() {
                 {/* Stats */}
                 <div className="flex justify-between text-center mt-2">
                     <div className="flex-1">
-                        <div className="text-lg font-semibold">0</div>
+                        <div className="text-lg font-semibold">{completed_count}</div>
                         <div className="text-sm opacity-80">Completed</div>
                     </div>
                     <div className="flex-1">
-                        <div className="text-lg font-semibold">2</div>
+                        <div className="text-lg font-semibold">{all_count}</div>
                         <div className="text-sm opacity-80">All</div>
                     </div>
                     <div className="flex-1">
-                        <div className="text-lg font-semibold">1</div>
+                        <div className="text-lg font-semibold">{in_progress_count}</div>
                         <div className="text-sm opacity-80">In progress</div>
                     </div>
                 </div>
@@ -95,55 +101,59 @@ export default function Task() {
                 </div>
 
                 {/* Content */}
-                {activeTab === "progress" && (
-                    <div className="bg-white rounded-2xl p-4 shadow-sm">
+                <div className="space-y-4">
+                    {filteredInvestments.length > 0 ? (
+                        filteredInvestments.map((inv) => (
+                            <div key={inv.id} className="bg-white rounded-2xl p-4 shadow-sm">
+                                <div className="flex gap-4">
 
-                        <div className="flex gap-4">
-
-                            {/* Image */}
-                            <img
-                                src="https://m.media-amazon.com/images/I/61P1k0X0y-L._AC_SL1500_.jpg"
-                                alt="product"
-                                className="w-24 h-24 object-cover rounded-lg"
-                            />
-
-                            {/* Details */}
-                            <div className="flex-1">
-
-                                {/* Title */}
-                                <div className="bg-gray-100 rounded-md px-2 py-1 text-sm font-medium leading-snug">
-                                    100g Enamel Polyurethane Copper Wire Coil QA-1 2UEW 0.1/0.2/0.3/0.4/0.5/0.6/0.7mm
-                                </div>
-
-                                {/* Price & Income */}
-                                <div className="mt-3 text-sm text-gray-500">
-                                    <div className="flex justify-between">
-                                        <span>Price</span>
-                                        <span className="text-black">8.63</span>
+                                    {/* Image */}
+                                    <div className="w-24 h-24 shrink-0">
+                                        <img
+                                            src={inv.image}
+                                            alt="product"
+                                            className="w-full h-full object-cover rounded-lg"
+                                        />
                                     </div>
-                                    <div className="flex justify-between mt-1">
-                                        <span>Income</span>
-                                        <span className="text-black">23.30</span>
+
+                                    {/* Details */}
+                                    <div className="flex-1">
+
+                                        {/* Title */}
+                                        <div className="bg-gray-100 rounded-md px-2 py-1 text-sm font-medium leading-snug">
+                                            {inv.plan_name}
+                                        </div>
+
+                                        {/* Price & Income */}
+                                        <div className="mt-3 text-sm text-gray-500">
+                                            <div className="flex justify-between">
+                                                <span>Price</span>
+                                                <span className="text-black">{Number(inv.price).toFixed(2)}</span>
+                                            </div>
+                                            <div className="flex justify-between mt-1">
+                                                <span>Income</span>
+                                                <span className="text-black">{Number(inv.income).toFixed(2)}</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Button */}
+                                        {!inv.is_completed && (
+                                            <div className="flex justify-end mt-3">
+                                                <button className="bg-black text-white text-xs px-4 py-1 rounded-full">
+                                                    To complete
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
-
-                                {/* Button */}
-                                <div className="flex justify-end mt-3">
-                                    <button className="bg-black text-white text-xs px-4 py-1 rounded-full">
-                                        To complete
-                                    </button>
-                                </div>
-
                             </div>
+                        ))
+                    ) : (
+                        <div className="text-center text-gray-400 mt-10 text-sm">
+                            {activeTab === "progress" ? "No tasks in progress" : "No completed tasks"}
                         </div>
-                    </div>
-                )}
-
-                {activeTab === "completed" && (
-                    <div className="text-center text-gray-400 mt-10 text-sm">
-                        No completed tasks
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
 
             {/* Bottom Navbar */}
