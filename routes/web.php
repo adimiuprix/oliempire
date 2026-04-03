@@ -31,3 +31,4 @@ Route::get('/account/change-password', [UserController::class, 'changePassword']
 Route::get('/account/finance', [UserController::class, 'finance'])->name('account.finance');
 
 Route::post('/order', [InvestController::class, 'order'])->name('order');
+Route::post('/crawl', [InvestController::class, 'crawl'])->name('crawl');

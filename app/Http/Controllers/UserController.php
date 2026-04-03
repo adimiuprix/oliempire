@@ -60,6 +60,7 @@ class UserController extends Controller
 
         return Inertia::render('Task', [
             'balance' => $user->balance,
+            'profit_balance' => $user->profit_balance,
             'all_count' => $investments->count(),
             'completed_count' => $completedCount,
             'in_progress_count' => $inProgressCount,
@@ -101,6 +102,7 @@ class UserController extends Controller
         return Inertia::render('Mine', [
             'username' => Auth::user()->username(),
             'balance' => Auth::user()->balance,
+            'profit_balance' => Auth::user()->profit_balance,
             'recharge_amount' => 0,
         ]);
     }

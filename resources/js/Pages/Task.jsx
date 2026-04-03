@@ -2,14 +2,31 @@
 import { useState } from "react"
 import LanguageIcon from '@mui/icons-material/Language';
 import Navbar from '../Components/Navbar';
+import { router, usePage } from '@inertiajs/react';
 
-export default function Task({ balance, all_count, completed_count, in_progress_count, investments }) {
+export default function Task({ balance, profit_balance, all_count, completed_count, in_progress_count, investments }) {
     const [activeTab, setActiveTab] = useState("progress")
 
     // Filter investments based on tab
     const filteredInvestments = investments.filter(inv =>
         activeTab === "progress" ? !inv.is_completed : inv.is_completed
     );
+
+    const handleCrawl = (investmentId = null) => {
+        router.post('/crawl', {
+            investment_id: investmentId
+        }, {
+            preserveScroll: true,
+            onSuccess: (page) => {
+                const flash = page.props.flash;
+                if (flash?.success) alert(flash.success);
+                if (flash?.error) alert(flash.error);
+            },
+            onError: (errors) => {
+                alert(Object.values(errors)[0] || "Action failed");
+            }
+        });
+    }
 
     return (
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
@@ -39,16 +56,22 @@ export default function Task({ balance, all_count, completed_count, in_progress_
                 </div>
 
                 {/* Balance Section */}
-                <div className="mt-2">
-                    <div className="text-2xl font-semibold">{Number(balance).toFixed(2)}</div>
-                    <div className="text-sm opacity-80">Total balance</div>
-
-                    {/* Recharge Button */}
-                    <div className="flex justify-end -mt-6">
-                        <button className="bg-black text-white text-xs px-4 py-1 rounded-full">
-                            Recharge
-                        </button>
+                <div className="mt-2 flex justify-between items-end">
+                    <div className="text-left">
+                        <div className="text-2xl font-semibold">{Number(balance).toFixed(2)}</div>
+                        <div className="text-sm opacity-80">Total balance</div>
                     </div>
+                    <div className="text-right">
+                        <div className="text-2xl font-semibold">{Number(profit_balance).toFixed(2)}</div>
+                        <div className="text-sm opacity-80">Profit balance</div>
+                    </div>
+                </div>
+
+                {/* Recharge Button */}
+                <div className="flex justify-start mt-2">
+                    <button className="bg-black text-white text-[10px] px-3 py-1 rounded-full uppercase font-bold">
+                        Recharge
+                    </button>
                 </div>
 
                 {/* Stats */}
@@ -69,7 +92,9 @@ export default function Task({ balance, all_count, completed_count, in_progress_
 
                 {/* Crawl Button */}
                 <div className="mt-3">
-                    <button className="w-full bg-yellow-300 text-black font-semibold py-3 rounded-xl">
+                    <button
+                        onClick={() => handleCrawl()}
+                        className="w-full bg-yellow-300 text-black font-semibold py-3 rounded-xl shadow-md active:scale-95 transition-transform">
                         Crawl
                     </button>
                 </div>
@@ -136,10 +161,12 @@ export default function Task({ balance, all_count, completed_count, in_progress_
                                             </div>
                                         </div>
 
-                                        {/* Button */}
+                                        {/* Progress button */}
                                         {!inv.is_completed && (
                                             <div className="flex justify-end mt-3">
-                                                <button className="bg-black text-white text-xs px-4 py-1 rounded-full">
+                                                <button
+                                                    onClick={() => handleCrawl(inv.id)}
+                                                    className="bg-black text-white text-xs px-4 py-1 rounded-full active:scale-95 transition-transform">
                                                     To complete
                                                 </button>
                                             </div>
