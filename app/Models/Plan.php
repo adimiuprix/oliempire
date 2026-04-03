@@ -37,4 +37,9 @@ class Plan extends Model
     {
         return $this->how_many_time;
     }
+
+    public function time()
+    {
+        return $this->belongsTo(Time::class, 'time_id');
+    }
 }

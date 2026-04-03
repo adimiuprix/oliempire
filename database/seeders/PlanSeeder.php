@@ -20,7 +20,7 @@ class PlanSeeder extends Seeder
             'interest_status' => '1',
             'return_for' => 1,
             'how_many_time' => 30,
-            'every_time' => 'Day',
+            'time_id' => 2, // Day
             'capital_back' => 1,
             'status' => 1,
             'invest_limit' => 10,
@@ -34,7 +34,7 @@ class PlanSeeder extends Seeder
             'interest_status' => '1',
             'return_for' => 1,
             'how_many_time' => 30,
-            'every_time' => 'Day',
+            'time_id' => 2, // Day
             'capital_back' => 1,
             'status' => 1,
             'invest_limit' => 5,
@@ -48,7 +48,7 @@ class PlanSeeder extends Seeder
             'interest_status' => '1',
             'return_for' => 1,
             'how_many_time' => 30,
-            'every_time' => 'Day',
+            'time_id' => 2, // Day
             'capital_back' => 1,
             'status' => 1,
             'invest_limit' => 3,

@@ -25,8 +25,8 @@ class InvestController extends Controller
             return back()->with('error', 'Insufficient balance');
         }
 
-        // We find the Time record by its name (stored in 'every_time')
-        $time = Time::where('name', $plan->every_time)->first();
+        // We find the Time record using the relationship
+        $time = $plan->time;
         $next_payment_date = now()->addHours($time ? (int)$time->time : 24);
 
         DB::transaction(function () use ($user, $plan, $next_payment_date) {
@@ -91,7 +91,7 @@ class InvestController extends Controller
                 $inv->increment('pay_count');
 
                 // Get interval hours
-                $time = Time::where('name', $plan->every_time)->first();
+                $time = $plan->time;
                 $inv->next_payment_date = $inv->next_payment_date->addHours($time ? (int)$time->time : 24);
                 $inv->save();
 
