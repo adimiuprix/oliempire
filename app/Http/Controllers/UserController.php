@@ -56,7 +56,7 @@ class UserController extends Controller
                 'image' => $plan->getImage(),
                 'price' => $investment->amount,
                 'income' => $plan->getTotalIncome(),
-                'status' => $investment->payment_status,
+                'status' => $investment->plan_status,
                 'is_completed' => $isCompleted,
                 'is_ready' => $isReady,
                 'next_payment_date' => $investment->next_payment_date,

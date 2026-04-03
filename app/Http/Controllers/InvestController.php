@@ -42,9 +42,9 @@ class InvestController extends Controller
                 'charge' => 0,
                 'final_amount' => $plan->amount,
                 'next_payment_date' => $next_payment_date,
-                'interest_amount' => null,
+                'interest_amount' => 0,
                 'pay_count' => 0,
-                'payment_status' => 1,
+                'plan_status' => 'running',
             ]);
         });
 
@@ -60,7 +60,7 @@ class InvestController extends Controller
         // Get active investments that are due for payment
         $query = Investment::with('plan')
             ->where('user_id', $user->id)
-            ->where('payment_status', 1)
+            ->where('plan_status', 'running')
             ->where('next_payment_date', '<=', $now);
 
         if ($investmentId) {
@@ -89,6 +89,12 @@ class InvestController extends Controller
                 $totalProfit += $profit;
 
                 $inv->increment('pay_count');
+                $inv->increment('interest_amount', $profit);
+
+                // Mark as completed if limit reached
+                if ($inv->pay_count >= $plan->how_many_time) {
+                    $inv->plan_status = 'completed';
+                }
 
                 // Get interval hours
                 $time = $plan->time;
