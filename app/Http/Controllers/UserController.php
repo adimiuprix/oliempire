@@ -14,7 +14,16 @@ class UserController extends Controller
         return Inertia::render('Dashboard', [
             'message' => "Our ge the sustainable investors!",
             'banner' => 'banner.webp',
-            'plans' => Plan::whereStatus(1)->get(),
+            'plans' => Plan::whereStatus(1)->get()->map(function ($plan) {
+                return [
+                    'id' => $plan->id,
+                    'name' => $plan->getName(),
+                    'price' => $plan->getPrice(),
+                    'daily_income' => $plan->getDailyIncome(),
+                    'total_income' => $plan->getTotalIncome(),
+                    'duration' => $plan->getDuration(),
+                ];
+            }),
         ]);
     }
 

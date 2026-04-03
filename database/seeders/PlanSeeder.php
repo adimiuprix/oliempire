@@ -14,9 +14,10 @@ class PlanSeeder extends Seeder
     {
         Plan::create([
             'plan_name' => 'Bronze',
+            'image' => 'bronze.png',
             'amount' => 100,
             'return_interest' => 1,
-            'interest_status' => '1', // assuming 1 is percentage
+            'interest_status' => '1',
             'return_for' => 1,
             'how_many_time' => 30,
             'every_time' => 'Day',
@@ -26,7 +27,8 @@ class PlanSeeder extends Seeder
         ]);
 
         Plan::create([
-            'plan_name' => 'Gold',
+            'plan_name' => 'Silver',
+            'image' => 'silver.png',
             'amount' => 500,
             'return_interest' => 2,
             'interest_status' => '1',
@@ -37,9 +39,10 @@ class PlanSeeder extends Seeder
             'status' => 1,
             'invest_limit' => 5,
         ]);
-
+        
         Plan::create([
-            'plan_name' => 'Platinum',
+            'plan_name' => 'Gold',
+            'image' => 'gold.png',
             'amount' => 1000,
             'return_interest' => 3,
             'interest_status' => '1',
@@ -50,5 +53,6 @@ class PlanSeeder extends Seeder
             'status' => 1,
             'invest_limit' => 3,
         ]);
+
     }
 }
