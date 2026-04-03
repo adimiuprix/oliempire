@@ -32,12 +32,13 @@ class UserController extends Controller
     public function task()
     {
         $user = Auth::user();
+        $now = now();
         $investments = Investment::with('plan')->where('user_id', $user->id)->latest()->get();
 
         $completedCount = 0;
         $inProgressCount = 0;
 
-        $mappedInvestments = $investments->map(function ($investment) use (&$completedCount, &$inProgressCount) {
+        $mappedInvestments = $investments->map(function ($investment) use (&$completedCount, &$inProgressCount, $now) {
             $plan = $investment->plan;
             $isCompleted = ($investment->pay_count >= $plan->how_many_time);
 
@@ -47,6 +48,8 @@ class UserController extends Controller
                 $inProgressCount++;
             }
 
+            $isReady = ($investment->next_payment_date <= $now && !$isCompleted);
+
             return [
                 'id' => $investment->id,
                 'plan_name' => $plan->plan_name,
@@ -55,6 +58,8 @@ class UserController extends Controller
                 'income' => $plan->getTotalIncome(),
                 'status' => $investment->payment_status,
                 'is_completed' => $isCompleted,
+                'is_ready' => $isReady,
+                'next_payment_date' => $investment->next_payment_date,
             ];
         });
 

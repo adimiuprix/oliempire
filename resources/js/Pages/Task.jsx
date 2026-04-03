@@ -12,6 +12,8 @@ export default function Task({ balance, profit_balance, all_count, completed_cou
         activeTab === "progress" ? !inv.is_completed : inv.is_completed
     );
 
+    const hasReadyTasks = investments.some(inv => inv.is_ready);
+
     const handleCrawl = (investmentId = null) => {
         router.post('/crawl', {
             investment_id: investmentId
@@ -94,8 +96,12 @@ export default function Task({ balance, profit_balance, all_count, completed_cou
                 <div className="mt-3">
                     <button
                         onClick={() => handleCrawl()}
-                        className="w-full bg-yellow-300 text-black font-semibold py-3 rounded-xl shadow-md active:scale-95 transition-transform">
-                        Crawl
+                        disabled={!hasReadyTasks}
+                        className={`w-full font-semibold py-3 rounded-xl shadow-md transition-all ${hasReadyTasks
+                            ? "bg-yellow-300 text-black active:scale-95"
+                            : "bg-gray-400 text-gray-200 cursor-not-allowed opacity-50"
+                            }`}>
+                        {hasReadyTasks ? "Crawl All Tasks" : "All Tasks Done"}
                     </button>
                 </div>
             </div>
@@ -163,11 +169,21 @@ export default function Task({ balance, profit_balance, all_count, completed_cou
 
                                         {/* Progress button */}
                                         {!inv.is_completed && (
-                                            <div className="flex justify-end mt-3">
+                                            <div className="flex justify-end mt-3 items-center gap-2">
+                                                {!inv.is_ready && (
+                                                    <span className="text-[10px] text-gray-400">
+                                                        Next: {new Date(inv.next_payment_date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                                                    </span>
+                                                )}
                                                 <button
                                                     onClick={() => handleCrawl(inv.id)}
-                                                    className="bg-black text-white text-xs px-4 py-1 rounded-full active:scale-95 transition-transform">
-                                                    To complete
+                                                    disabled={!inv.is_ready}
+                                                    className={`px-4 py-1 rounded-full text-xs transition-all ${
+                                                        inv.is_ready
+                                                        ? "bg-black text-white active:scale-95"
+                                                        : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                                    }`}>
+                                                    {inv.is_ready ? "To complete" : "Waiting"}
                                                 </button>
                                             </div>
                                         )}
