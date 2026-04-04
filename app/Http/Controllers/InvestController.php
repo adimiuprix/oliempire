@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Investment;
 use App\Models\Plan;
-use App\Models\Time;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,9 +24,8 @@ class InvestController extends Controller
             return back()->with('error', 'Insufficient balance');
         }
 
-        // We find the Time record using the relationship
-        $time = $plan->time;
-        $next_payment_date = now()->addHours($time ? (int)$time->time : 24);
+        // Set next_payment_date to now() so that the user can immediately crawl for the first profit
+        $next_payment_date = now();
 
         DB::transaction(function () use ($user, $plan, $next_payment_date) {
             $user->decrement('balance', $plan->amount);

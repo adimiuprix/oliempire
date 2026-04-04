@@ -15,11 +15,11 @@ class PlanSeeder extends Seeder
         Plan::create([
             'plan_name' => 'Bronze',
             'image' => 'bronze.png',
-            'amount' => 100,
+            'amount' => 10,
             'interest_amount' => 1,
             'interest_status' => '1',
             'return_for' => 1,
-            'how_many_time' => 30,
+            'how_many_time' => 15,
             'time_id' => 2, // Day
             'capital_back' => 1,
             'status' => 1,
@@ -29,11 +29,11 @@ class PlanSeeder extends Seeder
         Plan::create([
             'plan_name' => 'Silver',
             'image' => 'silver.png',
-            'amount' => 500,
+            'amount' => 50,
             'interest_amount' => 2,
             'interest_status' => '1',
             'return_for' => 1,
-            'how_many_time' => 30,
+            'how_many_time' => 15,
             'time_id' => 2, // Day
             'capital_back' => 1,
             'status' => 1,
@@ -43,11 +43,11 @@ class PlanSeeder extends Seeder
         Plan::create([
             'plan_name' => 'Gold',
             'image' => 'gold.png',
-            'amount' => 1000,
+            'amount' => 100,
             'interest_amount' => 3,
             'interest_status' => '1',
             'return_for' => 1,
-            'how_many_time' => 30,
+            'how_many_time' => 15,
             'time_id' => 2, // Day
             'capital_back' => 1,
             'status' => 1,
