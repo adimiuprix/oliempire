@@ -169,6 +169,59 @@ class UserController extends Controller
 
     public function finance()
     {
-        return Inertia::render('Account/Finance');
+        $user = Auth::user();
+        $basic_transactions = [];
+        $withdrawal_transactions = [];
+
+        // Basic transactions from Investments (purchases and profits)
+        $investments = \App\Models\Investment::with('plan')->where('user_id', $user->id)->get();
+        foreach ($investments as $inv) {
+            $planName = $inv->plan ? $inv->plan->plan_name : 'Plan';
+            
+            // Purchase / reduction
+            $basic_transactions[] = [
+                'title' => 'System reduction (' . $planName . ')',
+                'date' => $inv->created_at->format('d/m/Y H:i:s'),
+                'amount' => -(float)$inv->amount,
+                'created_at' => $inv->created_at->timestamp,
+            ];
+
+            // Profit / increase (if the plan generated profit)
+            if ($inv->interest_amount > 0) {
+                // If profit is given instantly during order, the timestamp is same as created_at
+                $basic_transactions[] = [
+                    'title' => 'System increase (' . $planName . ' Profit)',
+                    'date' => $inv->updated_at->format('d/m/Y H:i:s'),
+                    'amount' => (float)$inv->interest_amount,
+                    'created_at' => $inv->updated_at->timestamp,
+                ];
+            }
+        }
+
+        // Sort basic transactions to be newest first
+        usort($basic_transactions, function ($a, $b) {
+            return $b['created_at'] <=> $a['created_at'];
+        });
+
+        // Withdrawal transactions
+        if (class_exists(\App\Models\Withdraw::class)) {
+            try {
+                $withdraws = \App\Models\Withdraw::where('user_id', $user->id)->latest()->get();
+                foreach ($withdraws as $wd) {
+                    $withdrawal_transactions[] = [
+                        'title' => 'Withdrawal',
+                        'date' => $wd->created_at->format('d/m/Y H:i:s'),
+                        'amount' => -(float)$wd->amount,
+                    ];
+                }
+            } catch (\Exception $e) {
+                // Ignore if table doesn't exist yet
+            }
+        }
+
+        return Inertia::render('Account/Finance', [
+            'basic_transactions' => array_values($basic_transactions),
+            'withdrawal_transactions' => array_values($withdrawal_transactions),
+        ]);
     }
 }
