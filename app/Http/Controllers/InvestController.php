@@ -55,26 +55,26 @@ class InvestController extends Controller
         $now = now();
         $investmentId = $request->investment_id;
 
-        // Get active investments that are due for payment
-        $query = Investment::with('plan')
-            ->where('user_id', $user->id)
-            ->where('plan_status', 'running')
-            ->where('next_payment_date', '<=', $now);
+        $result = DB::transaction(function () use ($user, $now, $investmentId) {
+            $query = Investment::with('plan')
+                ->where('user_id', $user->id)
+                ->where('plan_status', 'running')
+                ->where('next_payment_date', '<=', $now)
+                ->lockForUpdate();
 
-        if ($investmentId) {
-            $query->where('id', $investmentId);
-        }
+            if ($investmentId) {
+                $query->where('id', $investmentId);
+            }
 
-        $investments = $query->get();
+            $investments = $query->get();
 
-        if ($investments->isEmpty()) {
-            return back()->with('error', 'No tasks available at the moment. Please wait for the next cycle.');
-        }
+            if ($investments->isEmpty()) {
+                return false;
+            }
 
-        $totalProfit = 0;
-        $count = 0;
+            $totalProfit = 0;
+            $count = 0;
 
-        DB::transaction(function () use ($investments, $user, &$totalProfit, &$count) {
             foreach ($investments as $inv) {
                 $plan = $inv->plan;
 
@@ -96,7 +96,7 @@ class InvestController extends Controller
 
                 // Get interval hours
                 $time = $plan->time;
-                $inv->next_payment_date = $inv->next_payment_date->addHours($time ? (int)$time->time : 24);
+                $inv->next_payment_date = now()->addHours($time ? (int)$time->time : 24);
                 $inv->save();
 
                 $count++;
@@ -105,10 +105,16 @@ class InvestController extends Controller
             if ($totalProfit > 0) {
                 $user->increment('profit_balance', $totalProfit);
             }
+
+            return ['count' => $count, 'totalProfit' => $totalProfit];
         });
 
-        if ($count > 0) {
-            return back()->with('success', "Success! You have completed $count tasks and earned $" . number_format($totalProfit, 2));
+        if ($result === false) {
+            return back()->with('error', 'No tasks available at the moment. Please wait for the next cycle.');
+        }
+
+        if ($result['count'] > 0) {
+            return back()->with('success', "Success! You have completed {$result['count']} tasks and earned $" . number_format($result['totalProfit'], 2));
         }
 
         return back()->with('error', 'All your active tasks have been completed for this cycle.');
