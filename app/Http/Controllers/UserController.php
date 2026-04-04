@@ -75,25 +75,25 @@ class UserController extends Controller
 
     public function team()
     {
+        $user = Auth::user()->load('referrals');
+
         return Inertia::render('Team', [
-            'invite_code' => '123456',
-            'link_refferal' => 'https://oliempire.com/register?ref=123456',
-            'team_size' => 10,
-            'team_recharge' => 100,
-            'team_withdrawal' => 100,
-            'new_team' => 0,
-            'first_recharge' => 1,
-            'first_withdrawal' => 1,
-            'teams' => [
-                [
-                    'id' => 1,
-                    'account' => 'rus.***********com',
-                    'recharge_amount' => 10,
-                    'recharge_rebate' => 1.38,
-                    'task_rebate' => 100,
-                    'join_time' => '10/02/2026 13:18:57'
-                ]
-            ]
+            'invite_code' => $user->invitation_code,
+            'link_refferal' => url('/register?ref=' . $user->invitation_code),
+            'team_size' => $user->referrals->count(),
+            'team_recharge' => 0,
+            'team_withdrawal' => 0,
+            'new_team' => $user->referrals->where('created_at', '>=', now()->subDays(7))->count(),
+            'first_recharge' => 0,
+            'first_withdrawal' => 0,
+            'teams' => $user->referrals->map(fn($ref) => [
+                'id' => $ref->id,
+                'account' => str($ref->username())->mask('*', 3, -4)->value(),
+                'recharge_amount' => 0,
+                'recharge_rebate' => 0,
+                'task_rebate' => 0,
+                'join_time' => $ref->created_at->format('d/m/Y H:i:s')
+            ])->values(),
         ]);
     }
 

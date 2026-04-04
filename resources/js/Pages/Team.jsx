@@ -10,6 +10,12 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 export default function Team({ invite_code, link_refferal, team_size, team_recharge, team_withdrawal, new_team, first_recharge, first_withdrawal, teams }) {
+    const handleCopy = (text) => {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Copied to clipboard!');
+        });
+    };
+
     return (
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
 
@@ -37,7 +43,10 @@ export default function Team({ invite_code, link_refferal, team_size, team_recha
                                     {invite_code}
                                 </span>
 
-                                <button className="bg-black text-white text-xs px-4 py-1 rounded-full">
+                                <button 
+                                    onClick={() => handleCopy(invite_code)}
+                                    className="bg-black text-white text-xs px-4 py-1 rounded-full active:scale-95 transition-transform"
+                                >
                                     Copy
                                 </button>
                             </div>
@@ -50,7 +59,10 @@ export default function Team({ invite_code, link_refferal, team_size, team_recha
                                 <div className="flex-1 min-w-0">
                                     <span className="block text-sm truncate sm:break-all">{link_refferal}</span>
                                 </div>
-                                <button className="bg-black text-white text-xs px-4 py-1 rounded-full shrink-0 w-fit">
+                                <button 
+                                    onClick={() => handleCopy(link_refferal)}
+                                    className="bg-black text-white text-xs px-4 py-1 rounded-full shrink-0 w-fit active:scale-95 transition-transform"
+                                >
                                     Copy
                                 </button>
                             </div>
