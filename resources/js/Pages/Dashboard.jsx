@@ -67,12 +67,6 @@ export default function Dashboard({ message, plans }) {
                 />
             </div>
 
-            {/* Countdown */}
-            <div className="text-center mt-4">
-                <div className="text-green-700 text-2xl font-semibold">23:13:32</div>
-                <p className="text-green-700 text-sm">Task Reset Countdown</p>
-            </div>
-
             {/* Task Hall */}
             <div className="px-4 mt-8 pb-20">
                 <div className="flex items-center justify-between mb-4">
