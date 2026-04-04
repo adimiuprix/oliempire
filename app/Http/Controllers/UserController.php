@@ -125,7 +125,7 @@ class UserController extends Controller
         $tronAddress = $wallet->tron_address;
 
         $evmNetworks = [
-            'BEP20-USDT', 'BNB', 'BEP20-USDC', 'POLYGON-USDC', 'POLYGON-USDT', 'ETH-USDC', 'ETH-USDT'
+            'BEP20-USDT', 'BNB', 'BEP20-USDC', 'POLYGON-USDC', 'POLYGON-USDT', 'ETH-USDC', 'ETH-USDT', 'SEPOLIA'
         ];
 
         $address = in_array($network, $evmNetworks) ? $evmAddress : $tronAddress;

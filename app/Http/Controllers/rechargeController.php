@@ -36,6 +36,8 @@ class rechargeController extends Controller
                 $count = $this->ethereum($network, $address);
             } elseif (in_array($network, ['TRX', 'TRC20-USDT'])) {
                 $count = $this->tron($network, $address);
+            } elseif ($network === 'SEPOLIA') {
+                $count = $this->sepolia($network, $address);
             }
         } catch (\Exception $e) {
             Log::error('Recharge Error: ' . $e->getMessage());
@@ -53,8 +55,8 @@ class rechargeController extends Controller
     {
         $count = 0;
         
-        // Is it native coin? (BNB or ETH)
-        $isNative = in_array($network, ['BNB', 'ETH']); 
+        // Is it native coin? (BNB or ETH or SEPOLIA)
+        $isNative = in_array($network, ['BNB', 'ETH', 'SEPOLIA']); 
         $action = $isNative ? 'txlist' : 'tokentx';
 
         // Etherscan V2 Multichain API (Supports BSC, Polygon, etc through chainid parameter)
@@ -130,6 +132,11 @@ class rechargeController extends Controller
         }
 
         return $this->processEVM(137, $network, $address, $contracts);
+    }
+
+    public function sepolia($network, $address)
+    {
+        return $this->processEVM(11155111, $network, $address);
     }
 
     public function ethereum($network, $address)

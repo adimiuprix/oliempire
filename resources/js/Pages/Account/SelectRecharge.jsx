@@ -13,6 +13,7 @@ export default function SelectRecharge() {
         { name: "ETH-USDT", icon: "/images/coins/eth-usdt.webp" },
         { name: "TRX", icon: "/images/coins/trx.webp" },
         { name: "TRC20-USDT", icon: "/images/coins/trc20-usdt.webp" },
+        { name: "SEPOLIA", icon: "/images/coins/eth-usdt.webp" },
     ];
 
     return (
