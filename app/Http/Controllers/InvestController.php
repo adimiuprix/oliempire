@@ -85,7 +85,7 @@ class InvestController extends Controller
                     continue;
                 }
 
-                $profit = ($inv->amount * $plan->return_interest) / 100;
+                $profit = ($inv->amount * $plan->interest_amount) / 100;
                 $totalProfit += $profit;
 
                 $inv->increment('pay_count');

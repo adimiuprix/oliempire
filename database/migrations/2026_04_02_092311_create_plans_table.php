@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('plan_name')->unique();
             $table->string('image')->nullable();
             $table->decimal('amount')->nullable();
-            $table->decimal('return_interest')->nullable();
+            $table->decimal('interest_amount')->nullable();
             $table->string('interest_status')->nullable();
             $table->TinyInteger('return_for')->nullable();
             $table->Integer('how_many_time')->nullable();

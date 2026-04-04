@@ -25,7 +25,7 @@ class Plan extends Model
 
     public function getDailyIncome()
     {
-        return $this->amount * $this->return_interest / 100;
+        return $this->amount * $this->interest_amount / 100;
     }
 
     public function getTotalIncome()
