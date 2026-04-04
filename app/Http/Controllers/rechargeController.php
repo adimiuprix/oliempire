@@ -97,7 +97,7 @@ class rechargeController extends Controller
             $txHash = $tx['hash'];
 
             // Register Deposit
-            $count += $this->registerDeposit($txHash, $amount);
+            $count += $this->registerDeposit($txHash, $amount, $network);
         }
 
         return $count;
@@ -191,7 +191,7 @@ class rechargeController extends Controller
                     if ($amount > 0) {
                         /* Note: We rely on the only_to=true filter in the TronGrid API request. 
                            Manual Base58 vs Hex comparison is avoided to prevent logic errors. */
-                        $count += $this->registerDeposit($txHash, $amount);
+                        $count += $this->registerDeposit($txHash, $amount, $network);
                     }
                 }
             } else {
@@ -200,7 +200,7 @@ class rechargeController extends Controller
                 $txHash = $tx['transaction_id'];
 
                 if ($amount > 0 && strtolower($tx['to'] ?? '') === strtolower($address)) {
-                    $count += $this->registerDeposit($txHash, $amount);
+                    $count += $this->registerDeposit($txHash, $amount, $network);
                 }
             }
         }
@@ -208,11 +208,14 @@ class rechargeController extends Controller
         return $count;
     }
 
-    private function registerDeposit($txHash, $amount)
+    private function registerDeposit($txHash, $amount, $network)
     {
         $user = Auth::user();
 
-        return DB::transaction(function () use ($txHash, $amount, $user) {
+        // Convert amount to USDT if not already USDT/USDC
+        $amountInUsdt = $this->convertToUsdt($amount, $network);
+
+        return DB::transaction(function () use ($txHash, $amountInUsdt, $user) {
             // Lock or check
             $exists = Deposit::where('trx', $txHash)->lockForUpdate()->exists();
 
@@ -223,15 +226,49 @@ class rechargeController extends Controller
             // Create deposit
             Deposit::create([
                 'user_id' => $user->id,
-                'amount' => $amount,
+                'amount' => $amountInUsdt,
                 'trx' => $txHash,
                 'status' => 'success',
             ]);
 
             // Add amount to user's balance
-            $user->increment('balance', $amount);
+            $user->increment('balance', $amountInUsdt);
 
             return 1;
         });
+    }
+
+    public function convertToUsdt($amount, $network)
+    {
+        $network = strtoupper($network);
+
+        // If it's already a stablecoin (USDT or USDC)
+        if (str_contains($network, 'USDT') || str_contains($network, 'USDC')) {
+            return $amount;
+        }
+
+        // Map network to Binance symbol
+        $symbol = '';
+        if ($network === 'BNB') {
+            $symbol = 'BNBUSDT';
+        } elseif (in_array($network, ['ETH', 'SEPOLIA'])) {
+            $symbol = 'ETHUSDT';
+        } elseif ($network === 'TRX') {
+            $symbol = 'TRXUSDT';
+        }
+
+        if ($symbol) {
+            try {
+                $response = Http::get("https://api.binance.com/api/v3/ticker/price?symbol={$symbol}");
+                if ($response->successful() && isset($response['price'])) {
+                    $price = floatval($response['price']);
+                    return $amount * $price;
+                }
+            } catch (\Exception $e) {
+                Log::error("Binance API Error for {$symbol}: " . $e->getMessage());
+            }
+        }
+
+        return $amount;
     }
 }
