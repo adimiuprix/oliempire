@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use App\Models\Deposit;
-use App\Models\User;
 
 class rechargeController extends Controller
 {
@@ -182,9 +181,9 @@ class rechargeController extends Controller
                     $amount = floatval($contractData['amount']) / 1000000;
                     $txHash = $tx['txID'];
                     
-                    if ($amount > 0 && strtolower($contractData['to_address'] ?? '') === strtolower($address)) {
-                        /* Note: Address in Tron API might be Hex or Base58, we should rely on the only_to=true filter 
-                           but further validation is good. For simplicity of Base58 comparison, skip if not matching. */
+                    if ($amount > 0) {
+                        /* Note: We rely on the only_to=true filter in the TronGrid API request. 
+                           Manual Base58 vs Hex comparison is avoided to prevent logic errors. */
                         $count += $this->registerDeposit($txHash, $amount);
                     }
                 }
@@ -193,7 +192,7 @@ class rechargeController extends Controller
                 $amount = floatval($tx['value']) / pow(10, $decimals);
                 $txHash = $tx['transaction_id'];
 
-                if ($amount > 0) {
+                if ($amount > 0 && strtolower($tx['to'] ?? '') === strtolower($address)) {
                     $count += $this->registerDeposit($txHash, $amount);
                 }
             }
