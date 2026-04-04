@@ -93,7 +93,11 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        $user = User::where('email', $request->email)->orWhere('phone', $request->phone)->first();
+        if ($request->filled('email')) {
+            $user = User::where('email', $request->email)->first();
+        } else {
+            $user = User::where('phone', $request->phone)->first();
+        }
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return redirect()->back()->with('error', 'Invalid credentials');
