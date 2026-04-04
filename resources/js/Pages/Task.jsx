@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react"
 import LanguageIcon from '@mui/icons-material/Language';
 import Navbar from '../Components/Navbar';
-import { router, usePage } from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 
 export default function Task({ balance, profit_balance, all_count, completed_count, in_progress_count, investments }) {
     const [activeTab, setActiveTab] = useState("progress");
@@ -58,6 +58,12 @@ export default function Task({ balance, profit_balance, all_count, completed_cou
         });
     }
 
+    const handleRecharge = () => {
+        router.visit("/account/select-recharge", {
+            method: "get",
+        });
+    }
+
     return (
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
 
@@ -99,7 +105,7 @@ export default function Task({ balance, profit_balance, all_count, completed_cou
 
                 {/* Recharge Button */}
                 <div className="flex justify-start mt-2">
-                    <button className="bg-black text-white text-[10px] px-3 py-1 rounded-full uppercase font-bold">
+                    <button onClick={handleRecharge} className="bg-black text-white text-[10px] px-3 py-1 rounded-full uppercase font-bold">
                         Recharge
                     </button>
                 </div>
