@@ -2,6 +2,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import PaidIcon from '@mui/icons-material/Paid';
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import CandlestickChartRoundedIcon from '@mui/icons-material/CandlestickChartRounded';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import LogoutIcon from '@mui/icons-material/Logout';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
@@ -10,7 +11,7 @@ import { Link, router } from '@inertiajs/react';
 
 import Navbar from '../Components/Navbar';
 
-export default function Mine({ username, balance, recharge_amount }) {
+export default function Mine({ username, balance, profit_balance, recharge_amount }) {
     return (
         <div className="w-full max-w-[720px] mx-auto bg-gray-100 min-h-screen relative overflow-x-hidden shadow-2xl">
 
@@ -54,12 +55,12 @@ export default function Mine({ username, balance, recharge_amount }) {
                 {/* Balance */}
                 <div className="flex justify-between text-center mt-2">
                     <div className="flex-1">
-                        <div className="text-lg font-semibold">{balance}</div>
+                        <div className="text-lg font-semibold">{Number(balance).toFixed(2)}</div>
                         <div className="text-sm opacity-80">Total balance (USDT)</div>
                     </div>
                     <div className="flex-1">
-                        <div className="text-lg font-semibold">{recharge_amount}</div>
-                        <div className="text-sm opacity-80">Recharge amount (USDT)</div>
+                        <div className="text-lg font-semibold">{Number(profit_balance).toFixed(2)}</div>
+                        <div className="text-sm opacity-80">Profit balance (USDT)</div>
                     </div>
                 </div>
 
@@ -81,7 +82,7 @@ export default function Mine({ username, balance, recharge_amount }) {
             </div>
 
             <div className="p-4 min-h-screen pt-10">
-                <div className="grid grid-cols-3 gap-3 px-4 mt-5">
+                <div className="grid grid-cols-4 gap-3 px-4 mt-5">
 
                     <Link href="/account/select-recharge">
                         <div className="flex flex-col items-center justify-center py-6">
@@ -107,6 +108,15 @@ export default function Mine({ username, balance, recharge_amount }) {
                                 <CandlestickChartRoundedIcon sx={{ fontSize: 23 }} className='text-green-600' />
                             </div>
                             <p className="mt-3 text-sm text-gray-700">Financial records</p>
+                        </div>
+                    </Link>
+
+                    <Link href="/account/transfer-profit">
+                        <div className="flex flex-col items-center justify-center py-6">
+                            <div className="p-3">
+                                <SwapHorizIcon sx={{ fontSize: 23 }} className='text-green-600' />
+                            </div>
+                            <p className="mt-3 text-sm text-gray-700">Transfer Profit</p>
                         </div>
                     </Link>
                 </div>

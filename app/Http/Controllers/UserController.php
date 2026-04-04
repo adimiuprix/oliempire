@@ -140,12 +140,16 @@ class UserController extends Controller
     {
         return Inertia::render('Account/Withdraw', [
             'balance' => Auth::user()->balance,
+            'profit_balance' => Auth::user()->profit_balance,
         ]);
     }
 
     public function balance()
     {
-        return Inertia::render('Account/Balance');
+        return Inertia::render('Account/Balance', [
+            'balance' => Auth::user()->balance,
+            'profit_balance' => Auth::user()->profit_balance,
+        ]);
     }
 
     public function changePassword()

@@ -1,7 +1,7 @@
 import AccountLayout from '../../Layouts/AccountLayout';
 import * as Tabs from '@radix-ui/react-tabs';
 
-export default function Withdraw({ balance }) {
+export default function Withdraw({ balance, profit_balance }) {
 
     const methods = [
         { name: "BEP20-USDT", image: "/images/coins/bep20-usdt.webp" },
@@ -25,11 +25,20 @@ export default function Withdraw({ balance }) {
                         </div>
                     </div>
 
-                    <div className="bg-gray-300 rounded-xl p-4 mb-5">
-                        <p className="text-sm opacity-80">Total balance</p>
-                        <p className="text-xl font-bold text-green-800">
-                            {balance} <span className="text-black text-base">USDT</span>
-                        </p>
+                    <div className="grid grid-cols-2 gap-3 mb-5">
+                        <div className="bg-gray-300 rounded-xl p-4">
+                            <p className="text-sm opacity-80">Main balance</p>
+                            <p className="text-xl font-bold text-green-800">
+                                {Number(balance).toFixed(2)} <span className="text-black text-sm">USDT</span>
+                            </p>
+                        </div>
+                        <div className="bg-gray-300 rounded-xl p-4">
+                            <p className="text-sm opacity-80">Profit balance</p>
+                            <p className="text-xl font-bold text-amber-700">
+                                {Number(profit_balance).toFixed(2)} <span className="text-black text-sm">USDT</span>
+                            </p>
+                            <p className="text-[10px] text-gray-500 mt-1">Transfer to main to withdraw</p>
+                        </div>
                     </div>
 
                     <p className="mb-2 text-sm">Withdrawal method:</p>

@@ -1,6 +1,6 @@
 import AccountLayout from '../../Layouts/AccountLayout';
 
-export default function Balance() {
+export default function Balance({ balance, profit_balance }) {
     return (
         <div className="w-full rounded-2xl px-8 py-6 text-black">
             <div className="bg-gray-200 rounded-2xl px-8 py-6 flex items-center justify-between">
@@ -8,15 +8,15 @@ export default function Balance() {
                 <div className="space-y-6">
                     {/* Basic Account */}
                     <div>
-                        <p className="text-gray-500 text-sm mb-1">Basic account</p>
-                        <p className="text-xl font-semibold">0.00 <span className="text-green-600 font-bold">USDT</span>
+                        <p className="text-gray-500 text-sm mb-1">Main balance</p>
+                        <p className="text-xl font-semibold">{Number(balance).toFixed(2)} <span className="text-green-600 font-bold">USDT</span>
                         </p>
                     </div>
 
-                    {/* Withdrawal Account */}
+                    {/* Profit Balance */}
                     <div>
-                        <p className="text-gray-500 text-sm mb-1">Withdrawal account</p>
-                        <p className="text-xl font-semibold">5.08 <span className="text-green-600 font-bold">USDT</span></p>
+                        <p className="text-gray-500 text-sm mb-1">Profit balance</p>
+                        <p className="text-xl font-semibold">{Number(profit_balance).toFixed(2)} <span className="text-green-600 font-bold">USDT</span></p>
                     </div>
                 </div>
 
@@ -30,3 +30,4 @@ export default function Balance() {
 }
 
 Balance.layout = (page) => <AccountLayout title="Balance">{page}</AccountLayout>;
+
