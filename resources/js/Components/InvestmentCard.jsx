@@ -10,8 +10,14 @@ export default function InvestmentCard({ plan }) {
             plan_id: plan.id,
         }, {
             preserveScroll: true,
-            onSuccess: () => {
-                alert("Order placed successfully");
+            onSuccess: (page) => {
+                if (page.props.flash && page.props.flash.error) {
+                    alert(page.props.flash.error);
+                } else if (page.props.flash && page.props.flash.success) {
+                    alert(page.props.flash.success);
+                } else {
+                    alert("Order placed successfully");
+                }
             },
             onError: (errors) => {
                 alert(errors.plan_id || "Something went wrong.");
