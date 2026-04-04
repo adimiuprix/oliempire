@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvestController;
 use App\Http\Controllers\TransferController;
+use App\Http\Controllers\rechargeController;
 
 Route::get('/', [AuthController::class, 'index'])->name('home');
 
@@ -35,3 +36,5 @@ Route::post('/account/transfer-profit', [TransferController::class, 'transfer'])
 
 Route::post('/order', [InvestController::class, 'order'])->name('order');
 Route::post('/crawl', [InvestController::class, 'crawl'])->name('crawl');
+
+Route::post('/check-deposit', [rechargeController::class, 'getIncomingTransactions'])->name('check-deposit');

@@ -1,8 +1,16 @@
 import Navbar from '../../Components/Navbar';
 import AccountLayout from '../../Layouts/AccountLayout';
 import { ReactQRCode } from '@lglab/react-qr-code'
+import { router } from '@inertiajs/react';
 
 export default function Recharge({ network, address }) {
+
+    const checkDepositBalance = () => {
+        router.post('/check-deposit', {
+            network: network,
+            address: address
+        });
+    }
 
     return (
         <div>
@@ -34,7 +42,7 @@ export default function Recharge({ network, address }) {
                                 <span className="text-sm text-gray-500 truncate">{address}</span>
                                 <button onClick={() => navigator.clipboard.writeText(address)} className="bg-black text-white text-xs px-3 py-1 rounded-md">Copy</button>
                             </div>
-                            <button className="w-full bg-green-500 hover:bg-green-600 transition text-white py-3 rounded-full font-medium">Recharge completed</button>
+                            <button onClick={checkDepositBalance} className="w-full bg-green-500 hover:bg-green-600 transition text-white py-3 rounded-full font-medium">Recharge completed</button>
                         </div>
                     </div>
                 </div>
