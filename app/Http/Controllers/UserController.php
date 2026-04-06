@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Plan;
 use App\Models\Investment;
+use App\Models\Coin;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -115,7 +116,9 @@ class UserController extends Controller
 
     public function selectRecharge()
     {
-        return Inertia::render('Account/SelectRecharge');
+        return Inertia::render('Account/SelectRecharge', [
+            'coins' => Coin::all()
+        ]);
     }
 
     public function recharge($network)

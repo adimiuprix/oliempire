@@ -2,19 +2,11 @@ import AccountLayout from '../../Layouts/AccountLayout';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Link } from '@inertiajs/react';
 
-export default function SelectRecharge() {
-    const networks = [
-        { name: "BEP20-USDT", icon: "/images/coins/bep20-usdt.webp" },
-        { name: "BNB", icon: "/images/coins/bnb.webp" },
-        { name: "BEP20-USDC", icon: "/images/coins/bep20-usdc.webp" },
-        { name: "POLYGON-USDC", icon: "/images/coins/polygon-usdc.webp" },
-        { name: "POLYGON-USDT", icon: "/images/coins/polygon-usdt.webp" },
-        { name: "ETH-USDC", icon: "/images/coins/eth-usdc.webp" },
-        { name: "ETH-USDT", icon: "/images/coins/eth-usdt.webp" },
-        { name: "TRX", icon: "/images/coins/trx.webp" },
-        { name: "TRC20-USDT", icon: "/images/coins/trc20-usdt.webp" },
-        { name: "SEPOLIA", icon: "/images/coins/eth-usdt.webp" },
-    ];
+export default function SelectRecharge({ coins }) {
+    const networks = coins.map(coin => ({
+        name: coin.name,
+        icon: `/images/coins/${coin.icon.toLowerCase()}`
+    }));
 
     return (
         <div className="w-full rounded-2xl px-8 py-6 text-black">
