@@ -8,9 +8,9 @@ export default function Article() {
                 {/* Image */}
                 <div className="flex justify-center mb-6">
                     <img
-                    src="/images/article.webp"
-                    alt="Oman Sustainability Week Awards"
-                    className="max-w-md w-full object-cover"
+                        src="/images/article.webp"
+                        alt="Oman Sustainability Week Awards"
+                        className="max-w-md w-full object-cover"
                     />
                 </div>
 
@@ -33,42 +33,6 @@ export default function Article() {
                     team members will receive a 21% team rebate every time they make a recharge.
                 </p>
 
-                <p className="mb-4">
-                    The rebates for a three-tier team are as follows:
-                </p>
-
-                {/* Rebate list */}
-                <div className="space-y-3 mb-6">
-                    <p>
-                    Level 1 Team Rebate: <span className="text-red-500">18%</span>
-                    </p>
-                    <p>
-                    Level 2 team rebate: <span className="text-red-500">3%</span>
-                    </p>
-                    <p>
-                    Level 3 team rebate: <span className="text-red-500">2%</span>
-                    </p>
-                </div>
-
-                {/* Example */}
-                <h3 className="font-semibold mb-3">For example:</h3>
-
-                <div className="space-y-4">
-                    <p>
-                    If you invite member A to deposit 1000 USDT, your rebate will be:
-                    1000 * 18% = 180 USDT;
-                    </p>
-
-                    <p>
-                    If member A invites member B to deposit 1000 USDT, your rebate will be:
-                    1000 * 3% = 30 USDT;
-                    </p>
-
-                    <p>
-                    If member B invites member C to deposit 1000 USDT, your rebate will be:
-                    1000 * 2% = 20 USDT;
-                    </p>
-                </div>
             </div>
         </div>
     );
