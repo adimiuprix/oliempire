@@ -9,14 +9,14 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import LanguageIcon from '@mui/icons-material/Language';
 import HeadsetIcon from '@mui/icons-material/Headset';
 
-export default function Register() {
+export default function Register({ refCode }) {
 
     const [formData, setFormData] = useState({
         phone: '',
         email: '',
         password: '',
         confirmPassword: '',
-        invitationCode: '',
+        invitationCode: refCode || '',
     });
 
     const handleChange = (e) => {

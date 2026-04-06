@@ -20,13 +20,15 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 
-    public function register()
+    public function register(Request $request)
     {
         if (Auth::check()) {
             return redirect()->route('dashboard');
         }
 
-        return Inertia::render('Auth/Register');
+        return Inertia::render('Auth/Register', [
+            'refCode' => $request->query('ref')
+        ]);
     }
 
     public function registerPost(Request $request)
