@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvestController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\rechargeController;
+use App\Http\Controllers\WithdrawController;
 
 Route::get('/', [AuthController::class, 'index'])->name('home');
 
@@ -34,9 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/account/finance', [UserController::class, 'finance'])->name('account.finance');
     Route::get('/account/transfer-profit', [TransferController::class, 'index'])->name('account.transfer-profit');
     Route::post('/account/transfer-profit', [TransferController::class, 'transfer'])->name('account.transfer-profit.post');
-
+    
     Route::post('/order', [InvestController::class, 'order'])->name('order');
     Route::post('/crawl', [InvestController::class, 'crawl'])->name('crawl');
+    Route::post('/account/withdraw', [WithdrawController::class, 'paymentProcess'])->name('payment.process');
 
     Route::post('/check-deposit', [rechargeController::class, 'getIncomingTransactions'])->name('check-deposit');
 });

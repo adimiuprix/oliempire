@@ -117,7 +117,7 @@ class UserController extends Controller
     public function selectRecharge()
     {
         return Inertia::render('Account/SelectRecharge', [
-            'coins' => Coin::all()
+            'coins' => Coin::whereStatus('active')->get()
         ]);
     }
 
@@ -144,6 +144,8 @@ class UserController extends Controller
         return Inertia::render('Account/Withdraw', [
             'balance' => Auth::user()->balance,
             'profit_balance' => Auth::user()->profit_balance,
+            'coins' => Coin::whereStatus('active')->get(),
+            'wallet_address' => Auth::user()->wallet_address,
         ]);
     }
 

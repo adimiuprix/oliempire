@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\Withdraw;
+use Illuminate\Support\Facades\Log;
 
 class WithdrawController extends Controller
 {
@@ -14,7 +15,12 @@ class WithdrawController extends Controller
     {
         $request->validate([
             'amount' => 'required|numeric|min:10',
+            'wallet_address' => 'required',
+            'password' => 'required',
+            'method' => 'required',
         ]);
+
+        Log::info($request->all());
 
         $user = Auth::user();
 

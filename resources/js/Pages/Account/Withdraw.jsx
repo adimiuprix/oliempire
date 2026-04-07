@@ -1,22 +1,29 @@
 import AccountLayout from '../../Layouts/AccountLayout';
 import * as Tabs from '@radix-ui/react-tabs';
+import { useForm } from '@inertiajs/react';
 
-export default function Withdraw({ balance, profit_balance }) {
+export default function Withdraw({ balance, profit_balance, coins, wallet_address }) {
 
-    const methods = [
-        { name: "BEP20-USDT", image: "/images/coins/bep20-usdt.webp" },
-        { name: "BNB", image: "/images/coins/bnb.webp" },
-        { name: "BEP20-USDC", image: "/images/coins/bep20-usdc.webp" },
-        { name: "TRX", image: "/images/coins/trx.webp" },
-        { name: "POLYGON-USDC", image: "/images/coins/polygon-usdc.webp" },
-        { name: "POLYGON-USDT", image: "/images/coins/polygon-usdt.webp" },
-        { name: "ETH-USDC", image: "/images/coins/eth-usdc.webp" },
-        { name: "ETH-USDT", image: "/images/coins/eth-usdt.webp" },
-    ];
+    const methods = coins.map(coin => ({
+        name: coin.name,
+        image: `/images/coins/${coin.icon}`
+    }));
+
+    const { data, setData, post, processing, errors } = useForm({
+        amount: profit_balance,
+        wallet_address: wallet_address || '',
+        password: '',
+        method: methods.length > 0 ? methods[0].name : '',
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        post('/account/withdraw');
+    }
 
     return (
         <div className="px-4 pb-20 pt-5">
-            <div className="flex flex-col items-center gap-6">
+            <form onSubmit={handleSubmit} className="flex flex-col items-center gap-6">
                 <div className="w-full bg-gray-200 rounded-2xl px-8 py-6 text-black shadow-sm">
                     <div className="flex justify-between items-start mb-4">
                         <div>
@@ -43,7 +50,11 @@ export default function Withdraw({ balance, profit_balance }) {
 
                     <p className="mb-2 text-sm">Withdrawal method:</p>
 
-                    <Tabs.Root defaultValue="BEP20-USDT" className="w-full">
+                    <Tabs.Root
+                        defaultValue={data.method}
+                        onValueChange={(val) => setData('method', val)}
+                        className="w-full"
+                    >
                         <Tabs.List className="flex flex-wrap gap-3 mb-6">
                             {methods.map((item, i) => (
                                 <Tabs.Trigger
@@ -68,14 +79,29 @@ export default function Withdraw({ balance, profit_balance }) {
                         ))}
                     </Tabs.Root>
 
-                    <div className="border-b border-black/20 py-3 mb-4 text-sm">
-                        0x8119d4623c37635Bcd323d8A3a8ba922a4C36829
+                    <div className="border-b border-black/20 mb-4">
+                        <input
+                            type="text"
+                            placeholder="Please enter the wallet address"
+                            className="w-full bg-transparent py-3 text-sm outline-none border-none placeholder:text-gray-500"
+                            value={data.wallet_address}
+                            onChange={e => setData('wallet_address', e.target.value)}
+                        />
+                        {errors.wallet_address && <div className="text-red-500 text-xs mt-1">{errors.wallet_address}</div>}
                     </div>
 
-                    <div className="border-b border-black/20 py-3 mb-4 flex justify-between">
-                        <span className="text-gray-700">Password</span>
-                        <span>👁</span>
+                    <div className="border-b border-black/20 mb-4 flex justify-between items-center">
+                        <input
+                            type="password"
+                            placeholder="Withdrawal password"
+                            className="w-full bg-transparent py-3 text-sm outline-none border-none placeholder:text-gray-500"
+                            value={data.password}
+                            onChange={e => setData('password', e.target.value)}
+                        />
+                        <span className="text-gray-500 cursor-pointer">👁</span>
                     </div>
+                    {errors.password && <div className="text-red-500 text-xs mb-4 -mt-3">{errors.password}</div>}
+                    {errors.amount && <div className="text-red-500 text-xs mb-4">{errors.amount}</div>}
 
                     <div className="flex justify-between text-sm mb-1">
                         <span>Fees</span>
@@ -84,16 +110,28 @@ export default function Withdraw({ balance, profit_balance }) {
 
                     <div className="flex justify-between text-sm mb-6">
                         <span>Actually received</span>
-                        <span>0 USDT</span>
+                        <span>{data.amount || 0} USDT</span>
                     </div>
 
-                    <button className="w-full bg-green-500 hover:bg-green-600 text-black font-medium py-3 rounded-full">
-                        Confirm
+                    <button
+                        type="submit"
+                        disabled={processing}
+                        className="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-400 text-black font-medium py-3 rounded-full transition-colors"
+                    >
+                        {processing ? 'Processing...' : 'Confirm'}
                     </button>
+                    
+                    {Object.keys(errors).length > 0 && !errors.wallet_address && !errors.password && !errors.amount && (
+                        <div className="text-red-500 text-center text-xs mt-4">
+                            There was an error with your submission.
+                        </div>
+                    )}
                 </div>
-            </div>
+            </form>
         </div>
+
     )
 }
 
 Withdraw.layout = (page) => <AccountLayout title="Withdraw">{page}</AccountLayout>;
+

@@ -67,9 +67,6 @@ export default function Mine({ username, balance, profit_balance, recharge_amoun
                 <div className="absolute left-1/2 -translate-x-1/2 -bottom-20 w-[94%]">
                     <div className="bg-linear-to-r from-gray-800 to-gray-700 rounded-2xl px-5 py-4 flex justify-between items-center shadow-xl">
                         <div>
-                            <p className="text-yellow-400 font-semibold text-sm">
-                                ♦ Investment Plan 1
-                            </p>
                             <p className="text-gray-300 text-xs mt-1">
                                 Save your money&time
                             </p>

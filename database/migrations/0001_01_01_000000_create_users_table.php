@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('referred_by')->nullable();
             $table->decimal('balance', 10, 2)->default(0);
+            $table->string('wallet_address')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
